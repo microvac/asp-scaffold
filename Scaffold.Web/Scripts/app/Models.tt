@@ -128,7 +128,9 @@ module <#=_namespace #> {
             var res = $.ajax(<#= _class.Name #>.ajaxSettings.build({
                 type: 'GET',
                 url: 'api/<#= _class.Name #>/GetAll',
-            }));
+            })).then((items) => {
+                return items.map((item) => new <#= _class.Name #>(item));
+            });
             return res;
         }
 

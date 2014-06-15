@@ -41,7 +41,11 @@ var App;
                 var res = $.ajax(Todo.ajaxSettings.build({
                     type: 'GET',
                     url: 'api/Todo/GetAll'
-                }));
+                })).then(function (items) {
+                    return items.map(function (item) {
+                        return new Todo(item);
+                    });
+                });
                 return res;
             };
 

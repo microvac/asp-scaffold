@@ -521,13 +521,13 @@
       <DependentUpon>app.less</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
-    <Content Include="Scripts\app\directives\Todo.js" />
+    <TypeScriptCompile Include="Scripts\app\directives\Todo.ts" />
     <Content Include="Content\app\app.less" />
     <Content Include="Content\app\variables.less" />
     <Content Include="Content\app\app.css.map">
       <DependentUpon>app.css</DependentUpon>
     </Content>
-    <Content Include="Scripts\app\controllers\TodoCtrl.js" />
+    <TypeScriptCompile Include="Scripts\app\controllers\TodoCtrl.ts" />
     <Content Include="Scripts\testing\config\testacular-unit-tests.conf.js" />
     <Content Include="Scripts\testing\jasmine\jasmine-html.js" />
     <Content Include="Scripts\testing\jasmine\jasmine.css" />
@@ -559,9 +559,9 @@
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app\App.ts" />
     <TypeScriptCompile Include="Scripts\app\Models.ts">
-      <DependentUpon>Models.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>Models.tt</DependentUpon>
     </TypeScriptCompile>
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />

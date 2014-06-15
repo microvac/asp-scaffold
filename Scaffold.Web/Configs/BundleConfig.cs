@@ -25,7 +25,8 @@ namespace App.Configs
                 .Include("~/Scripts/angular-classy.js"));
 
             bundles.Add(new ScriptBundle("~/js/app")
-                .Include("~/Scripts/app/app.js")
+                .Include("~/Scripts/app/Models.js")
+                .Include("~/Scripts/app/App.js")
                 .Include("~/Scripts/app/controllers/*.js")
                 .Include("~/Scripts/app/directives/*.js"));
         }

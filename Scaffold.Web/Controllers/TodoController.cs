@@ -9,7 +9,6 @@ using System.Web.Http;
 
 namespace App.Controllers
 {
-    [ToTS(TSFlag.ServerProxy)]
     public class TodoController : CRUDController<Todo>
     {
         private static IDictionary<long, Todo> todos = new Dictionary<long, Todo> 

@@ -49,7 +49,9 @@ module App.Models {
             var res = $.ajax(Todo.ajaxSettings.build({
                 type: 'GET',
                 url: 'api/Todo/GetAll',
-            }));
+            })).then((items) => {
+                return items.map((item) => new Todo(item));
+            });
             return res;
         }
 

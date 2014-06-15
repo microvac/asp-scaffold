@@ -2,6 +2,7 @@
 /// <reference path="Models.ts"/>
 var App;
 (function (App) {
-    App.app = angular.module('app');
+    App.app = angular.module('app', []).run(function ($http) {
+    });
 })(App || (App = {}));
 //# sourceMappingURL=App.js.map
