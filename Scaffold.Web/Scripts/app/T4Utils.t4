@@ -114,11 +114,42 @@
 		return false;
     }
 
-	enum THint {
-		Normal,
-		Knockout,
-		KnockoutInArray,
+	bool IsModel(CodeClass _class)
+    {
+        foreach (var p in GetParents(_class))
+			if (p.Name == "Model" && p.Namespace.Name == "Scaffold")
+				return true;
+		return false;
     }
+	bool IsControllerForModel(CodeClass _class, CodeClass _modelClass)
+    {
+        CodeClass controller = null;
+        foreach (var p in GetParents(_class))
+			if (p.Name == "ModelController" && p.Namespace.Name == "Scaffold"){
+                controller = p;
+                break;
+            }
+        if(controller == null)  
+            return false;
+        return controller.FullName.Split('<','>')[1] == _modelClass.FullName;
+    }
+
+	bool IsCrudController(CodeClass _class)
+    {
+        foreach (var p in GetParents(_class))
+			if (p.Name == "CRUDController" && p.Namespace.Name == "Scaffold")
+                return true;
+        return false;    
+    }
+
+	bool IsReadOnlyController(CodeClass _class)
+    {
+        foreach (var p in GetParents(_class))
+			if (p.Name == "ReadOnlyController" && p.Namespace.Name == "Scaffold")
+                return true;
+        return false;    
+    }
+
 	string GetTSDefault(CodeProperty p) { return GetTSDefault(GetTSType(p)); }
 	string GetTSDefault(CodeVariable p) { return GetTSDefault(GetTSType(p)); }
 	string GetTSDefault(string type) 
@@ -129,11 +160,11 @@
 			default: return "null";
 		}
 	}
-	string GetTSType(CodeProperty p, THint hint = THint.Normal) { return GetTSType(p.Type.AsString, hint); }
-	string GetTSType(CodeParameter p, THint hint = THint.Normal) { return GetTSType(p.Type.AsString, hint); }
-	string GetTSType(CodeFunction p, THint hint = THint.Normal) { return GetTSType(p.Type.AsString, hint); }
-	string GetTSType(CodeVariable p, THint hint = THint.Normal) { return GetTSType(p.Type.AsString, hint); }
-	string GetTSType(string type, THint hint = THint.Normal)
+	string GetTSType(CodeProperty p) { return GetTSType(p.Type.AsString); }
+	string GetTSType(CodeParameter p) { return GetTSType(p.Type.AsString); }
+	string GetTSType(CodeFunction p) { return GetTSType(p.Type.AsString); }
+	string GetTSType(CodeVariable p) { return GetTSType(p.Type.AsString); }
+	string GetTSType(string type)
 	{
 		type = SimplifyType(type);
 		switch(type)
@@ -146,55 +177,25 @@
 			case "float":
 			case "double":
             {
-                switch (hint)
-                {
-					case THint.Knockout: return "KnockoutObservable<number>";
-					case THint.KnockoutInArray:
-					case THint.Normal: return "number";
-                }
-				break;
+                return "number";
             }
 			case "bool": 
             {
-                switch (hint)
-                {
-					case THint.Knockout: return "KnockoutObservable<boolean>";
-					case THint.KnockoutInArray:
-					case THint.Normal: return "boolean";
-                }
-				break;
+                return "boolean";
             }
 			case "string": 
             {
-                switch (hint)
-                {
-					case THint.Knockout: return "KnockoutObservable<string>";
-					case THint.KnockoutInArray:
-					case THint.Normal: return "string";
-                }
-				break;
+                return "string";
             }
 			default: 
-                if (EnumerateTSClass("TSFlag.JSonData").Select(x => x.FullName).Contains(type))
-                    switch (hint)
-					{
-						case THint.KnockoutInArray:
-						case THint.Knockout: return "IKO" + ShortName(type);
-						case THint.Normal:
-						default:
-							return "App.Models.I" + ShortName(type);
-					}
+                if (EnumerateModels("App.Models").Select(x => x.FullName).Contains(type))
+                    return "App.Models.I" + ShortName(type);
                 if (EnumerateTSEnum().Select(x => x.FullName).Contains(type))
                     return "App.Models."+ShortName(type);
 				var a = GetListType(type);
 				if (a != null)
                 {
-                    switch (hint)
-					{
-						case THint.KnockoutInArray:
-						case THint.Knockout: return string.Format("KnockoutObservableArray<{0}>", GetTSType(a, THint.KnockoutInArray));
-						case THint.Normal: return string.Format("Array<{0}>", GetTSType(a, THint.Normal));
-					}
+                    return string.Format("Array<{0}>", GetTSType(a));
                 }
 				break;
 		}
@@ -261,6 +262,20 @@
 		foreach (var _class in AllClasses
 								.Where(x => x.Kind == vsCMElement.vsCMElementClass)
 								.Where(x => IsTSFlag((CodeElement)x, ca => ca.Value.EndsWith(kind)))
+				) 
+			yield return _class;
+	}
+	IEnumerable<CodeClass> EnumerateModels(string _namespace)
+	{
+		foreach (var _class in AllClasses
+								.Where(c => IsModel(c) && c.Namespace.Name == _namespace)
+				) 
+			yield return _class;
+	}
+	IEnumerable<CodeClass> EnumerateControllers(CodeClass codeClass)
+	{
+		foreach (var _class in AllClasses
+								.Where(c => IsControllerForModel(c, codeClass))
 				) 
 			yield return _class;
 	}

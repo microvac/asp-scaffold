@@ -7,7 +7,6 @@ using System.Web;
 
 namespace App.Models
 {
-    [ToTS(TSFlag.JSonData)]
     public class Todo: Model
     {
         public String Name { get; set; }
