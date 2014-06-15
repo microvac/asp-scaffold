@@ -1,0 +1,110 @@
+﻿<#@ template debug="false" hostspecific="true" language="C#" #>
+<#@ output extension=".ts" #>
+<#@include file="T4Utils.t4" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+// WARNING: T4 generated file  (it is related to CodeToServerProxy)
+//
+
+module App.Models {
+<#
+    foreach (var _enum in EnumerateTSEnum())
+    {
+		var elem = (CodeElement)_enum;
+		Indent(1); WriteLine("// {0}: {1}", elem.ProjectItem.FileNames[0], elem.StartPoint.Line);
+
+		Indent(1); Write("export enum {0}", _enum.Name); WriteLine(" {");
+        foreach (var member in ((CodeElement)_enum).Children.Cast<CodeElement>().Where(x => x.Kind == vsCMElement.vsCMElementVariable).Cast<CodeVariable>())
+        {
+			Indent(2); WriteLine(GetText((CodeElement)member)); 
+        }
+		Indent(1); WriteLine("}");
+    }
+	WriteLine("");
+
+	var jsoncls = EnumerateTSClass("TSFlag.JSonData").ToList();
+	var outts = new [] {
+		new { P = "I", H = THint.Normal }
+    };
+	foreach (var _class in jsoncls) 
+	{
+		var elem = (CodeElement)_class;
+		Indent(1); WriteLine("// {0}: {1}", elem.ProjectItem.FileNames[0], elem.StartPoint.Line);
+
+        foreach (var outt in outts)
+        {
+			Indent(1); Write("export interface {0}{1}", outt.P, _class.Name); 
+			if (_class.Bases.Count > 0)
+			{
+				bool first = true;
+				foreach (var super in _class.Bases.Cast<CodeElement>().Where(x => jsoncls.Select(c => c.Name).Contains(x.Name)))
+				{
+					Write(first ? " extends " : ", ");
+					first = false;
+					Write(outt.P + super.Name);
+				}
+			}
+			WriteLine(" {");
+			foreach(var member in EnumerateTSMembers(_class)) 
+			{
+				if (member.Kind == vsCMElement.vsCMElementProperty)
+                {
+					var p = (CodeProperty)member;
+					Indent(2);
+					WriteLine("{0}: {1};", GetTSName(p), GetTSType(p, outt.H));
+                }
+				else if (member.Kind == vsCMElement.vsCMElementVariable)
+                {
+					var p = (CodeVariable)member;
+					Indent(2);
+					WriteLine("{0}: {1};", GetTSName(p), GetTSType(p, outt.H));
+                }
+			}
+			Indent(1); WriteLine("}");
+			WriteLine("");
+        }
+
+		var allClasses = new List<CodeClass>();
+		allClasses.Add(_class);
+		allClasses.AddRange(_class.Bases.Cast<CodeClass>().Where(x => jsoncls.Select(c => c.Name).Contains(x.Name)));;
+		var allMembers = from c in allClasses from m in EnumerateTSMembers(c) select m;
+		 
+		Indent(1); Write("export class {0}", _class.Name); WriteLine(" {");
+		foreach(var member in allMembers) 
+		{
+			if (member.Kind == vsCMElement.vsCMElementProperty)
+            {
+				var p = (CodeProperty)member;
+				Indent(2);
+				WriteLine("{0}: {1};", GetTSName(p), GetTSType(p, THint.Normal));
+            }
+			else if (member.Kind == vsCMElement.vsCMElementVariable)
+            {
+				var p = (CodeVariable)member;
+				Indent(2);
+				WriteLine("{0}: {1};", GetTSName(p), GetTSType(p, THint.Normal));
+            }
+		}
+		Indent(2); Write("constructor(data?: I{0})",  _class.Name); WriteLine(" {");
+		foreach(var member in allMembers) 
+		{
+			if (member.Kind == vsCMElement.vsCMElementProperty)
+            {
+				var p = (CodeProperty)member;
+				Indent(3);
+				WriteLine("this.{0} = data ? data.{0} : null;", GetTSName(p), GetTSDefault(p));
+            }
+			else if (member.Kind == vsCMElement.vsCMElementVariable)
+            {
+				var p = (CodeVariable)member;
+				Indent(3);
+				WriteLine("this.{0} = data ? data.{0} : {1};", GetTSName(p), GetTSDefault(p));
+            }
+		}
+		Indent(2); WriteLine("}");
+		Indent(1); WriteLine("}");
+		WriteLine("");
+
+	}
+#>
+}

@@ -1,4 +1,5 @@
 ﻿using App.Models;
+using Scaffold;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,8 @@ using System.Web.Http;
 
 namespace App.Controllers
 {
-    public class TodoController : ApiController
+    [ToTS(TSFlag.ServerProxy)]
+    public class TodoController : ModelController<Todo>
     {
         private static IDictionary<long, Todo> todos = new Dictionary<long, Todo> 
         {  
@@ -17,14 +19,9 @@ namespace App.Controllers
             {3, new Todo{ID=3, Name="Tiga"}},
         };
 
-        public IEnumerable<Todo> GetAll()
+        public TodoController(): base(todos)
         {
-            return todos.Values;
         }
 
-        public Todo Get(long id)
-        {
-            return todos[id];
-        }
     }
 }

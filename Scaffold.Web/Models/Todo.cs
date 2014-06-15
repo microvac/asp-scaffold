@@ -1,14 +1,17 @@
-﻿using System;
+﻿using App.Controllers;
+using Scaffold;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace App.Models
 {
-    public class Todo
+    [ToTS(TSFlag.JSonData)]
+    public class Todo: Model
     {
-        public long ID { get; set; }
         public String Name { get; set; }
+        public String Description { get; set; }
     }
 
 }

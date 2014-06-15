@@ -1,10 +1,6 @@
-/*global angular */
-/*jshint unused:false */
-'use strict';
-
-/**
- * The main TodoMVC app module
- *
- * @type {angular.Module}
- */
-var app = angular.module('app', ['classy']);
+﻿/// <reference path="../typings/angularjs/angular.d.ts"/>
+var App;
+(function (App) {
+    var app = angular.module('app');
+})(App || (App = {}));
+//# sourceMappingURL=App.js.map

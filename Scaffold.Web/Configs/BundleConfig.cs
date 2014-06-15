@@ -27,7 +27,6 @@ namespace App.Configs
             bundles.Add(new ScriptBundle("~/js/app")
                 .Include("~/Scripts/app/app.js")
                 .Include("~/Scripts/app/controllers/*.js")
-                .Include("~/Scripts/app/services/*.js")
                 .Include("~/Scripts/app/directives/*.js"));
         }
     }

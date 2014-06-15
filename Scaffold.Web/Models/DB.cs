@@ -18,7 +18,6 @@ namespace App.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-             modelBuilder.Entity<Todo>().ToTable("todo", "public");
         }
         protected override DbEntityValidationResult ValidateEntity(DbEntityEntry entityEntry, IDictionary<object, object> items) 
         {
