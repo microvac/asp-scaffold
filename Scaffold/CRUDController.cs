@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,23 +9,28 @@ using System.Web.Http;
 namespace Scaffold
 {
     public class CRUDController<TModel>: ReadOnlyController<TModel>
-        where TModel: Model
+        where TModel: Model, new()
     {
-        public CRUDController(IDictionary<long, TModel> models): base(models) { }
+        public CRUDController(DbContext dbContext): base(dbContext) { }
 
         public void Delete(long id)
         {
-            models.Remove(id);
+            var model = new TModel { ID = id };
+            dbContext.Entry(model).State = EntityState.Deleted;
+            dbContext.SaveChanges();
         }
 
-        public void Post([FromBody] TModel model)
+        public long Post([FromBody] TModel model)
         {
-            models[model.ID] = model;
+            dbSet.Add(model);
+            dbContext.SaveChanges();
+            return model.ID;
         }
 
-        public void Put(long id, [FromBody] TModel model)
+        public void Put([FromBody] TModel model)
         {
-            models[id] = model;
+            dbContext.Entry(model).State = EntityState.Modified;
+            dbContext.SaveChanges();
         }
     }
 }

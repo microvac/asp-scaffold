@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,18 +8,18 @@ using System.Threading.Tasks;
 namespace Scaffold
 {
     public class ReadOnlyController<TModel>: ModelController<TModel>
-        where TModel: Model
+        where TModel: Model, new()
     {
-        public ReadOnlyController(IDictionary<long, TModel> models): base(models) { }
+        public ReadOnlyController(DbContext dbContext): base(dbContext) { }
 
         public IEnumerable<TModel> GetAll()
         {
-            return models.Values;
+            return dbSet;
         }
 
         public TModel Get(long id)
         {
-            return models[id];
+            return dbSet.FirstOrDefault(m => m.ID == id);
         }
 
     }

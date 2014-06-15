@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,13 +9,15 @@ using System.Web.Http;
 namespace Scaffold
 {
     public class ModelController<TModel>: ApiController
-        where TModel: Model
+        where TModel: Model, new()
     {
-        protected IDictionary<long, TModel> models;
+        protected DbContext dbContext;
+        protected DbSet<TModel> dbSet;
 
-        public ModelController(IDictionary<long, TModel> models)
+        public ModelController(DbContext dbContext)
         {
-            this.models = models;
+            this.dbContext = dbContext;
+            this.dbSet = dbContext.Set<TModel>();
         }
 
     }
