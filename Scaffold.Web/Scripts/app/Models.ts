@@ -39,6 +39,7 @@ module App.Models {
         Name: string;
         Description: string;
         constructor(data?: ITodo) {
+            this.ID = data ? data.ID : null;
             this.Name = data ? data.Name : null;
             this.Description = data ? data.Description : null;
         }
@@ -48,9 +49,9 @@ module App.Models {
         static GetAll(): JQueryPromise<Array<Todo>> {
             var res = $.ajax(Todo.ajaxSettings.build({
                 type: 'GET',
-                url: 'api/Todo/GetAll',
-            })).then((items) => {
-                return items.map((item) => new Todo(item));
+                url: '/api/Todo/GetAll',
+            })).then((models) => {
+                return models.map((model) => new Todo(model));
             });
             return res;
         }
@@ -58,31 +59,38 @@ module App.Models {
         static Get(id: number): JQueryPromise<Todo> {
             var res = $.ajax(Todo.ajaxSettings.build({
                 type: 'GET',
-                url: 'api/Todo/Get/'+id,
-            }));
+                url: '/api/Todo/Get/'+id,
+            })).then((model) => new Todo(model));
             return res;
         }
                 
-        Save(): JQueryPromise<Todo> {
+        Save(): JQueryPromise<void> {
+            var isNew = this.ID == null;
+            var model = this;
             var res = $.ajax(Todo.ajaxSettings.build({
-                type: 'GET',
-                url: 'api/Todo/GetAll',
-            }));
+                type: isNew ? 'POST' : 'PUT',
+                url: '/api/Todo/'+(isNew ? 'Post' : 'Put'),
+                data: JSON.stringify(this)
+            })).then((id) => {
+                if(isNew){
+                    this.ID = id;
+                }
+            });
             return res;
         }
 
-        Delete(): JQueryPromise<Todo> {
+        Delete(): JQueryPromise<void> {
             var res = $.ajax(Todo.ajaxSettings.build({
                 type: 'DELETE',
-                url: 'api/Todo/Delete?id='+this.ID,
+                url: '/api/Todo/Delete/'+this.ID,
             }));
             return res;
         }
 
-        static Delete(id: number): JQueryPromise<Todo> {
+        static Delete(id: number): JQueryPromise<void> {
             var res = $.ajax(Todo.ajaxSettings.build({
                 type: 'GET',
-                url: 'api/Todo/Get/'+id,
+                url: '/api/Todo/Delete/'+id,
             }));
             return res;
         }
@@ -90,7 +98,7 @@ module App.Models {
         GetAduh(): JQueryPromise<number> {
             var res = $.ajax(Todo.ajaxSettings.build({
                 type: 'GET',
-                url: 'api/Todo/GetAduh',
+                url: '/api/Todo/GetAduh',
             }));
             return res;
         }

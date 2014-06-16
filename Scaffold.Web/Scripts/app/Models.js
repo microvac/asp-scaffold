@@ -33,6 +33,7 @@ var App;
 
         var Todo = (function () {
             function Todo(data) {
+                this.ID = data ? data.ID : null;
                 this.Name = data ? data.Name : null;
                 this.Description = data ? data.Description : null;
             }
@@ -40,10 +41,10 @@ var App;
             Todo.GetAll = function () {
                 var res = $.ajax(Todo.ajaxSettings.build({
                     type: 'GET',
-                    url: 'api/Todo/GetAll'
-                })).then(function (items) {
-                    return items.map(function (item) {
-                        return new Todo(item);
+                    url: '/api/Todo/GetAll'
+                })).then(function (models) {
+                    return models.map(function (model) {
+                        return new Todo(model);
                     });
                 });
                 return res;
@@ -52,23 +53,33 @@ var App;
             Todo.Get = function (id) {
                 var res = $.ajax(Todo.ajaxSettings.build({
                     type: 'GET',
-                    url: 'api/Todo/Get/' + id
-                }));
+                    url: '/api/Todo/Get/' + id
+                })).then(function (model) {
+                    return new Todo(model);
+                });
                 return res;
             };
 
             Todo.prototype.Save = function () {
+                var _this = this;
+                var isNew = this.ID == null;
+                var model = this;
                 var res = $.ajax(Todo.ajaxSettings.build({
-                    type: 'GET',
-                    url: 'api/Todo/GetAll'
-                }));
+                    type: isNew ? 'POST' : 'PUT',
+                    url: '/api/Todo/' + (isNew ? 'Post' : 'Put'),
+                    data: JSON.stringify(this)
+                })).then(function (id) {
+                    if (isNew) {
+                        _this.ID = id;
+                    }
+                });
                 return res;
             };
 
             Todo.prototype.Delete = function () {
                 var res = $.ajax(Todo.ajaxSettings.build({
                     type: 'DELETE',
-                    url: 'api/Todo/Delete?id=' + this.ID
+                    url: '/api/Todo/Delete/' + this.ID
                 }));
                 return res;
             };
@@ -76,7 +87,7 @@ var App;
             Todo.Delete = function (id) {
                 var res = $.ajax(Todo.ajaxSettings.build({
                     type: 'GET',
-                    url: 'api/Todo/Get/' + id
+                    url: '/api/Todo/Delete/' + id
                 }));
                 return res;
             };
@@ -84,7 +95,7 @@ var App;
             Todo.prototype.GetAduh = function () {
                 var res = $.ajax(Todo.ajaxSettings.build({
                     type: 'GET',
-                    url: 'api/Todo/GetAduh'
+                    url: '/api/Todo/GetAduh'
                 }));
                 return res;
             };

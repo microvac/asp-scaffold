@@ -316,6 +316,37 @@
 			yield return member;
         }
 	}
+	IEnumerable<CodeElement> EnumerateAllTSMembers(CodeClass _class)
+    {
+        IEnumerable<CodeElement> members = null;
+        try 
+        {
+            members = EnumerateTSMembers(_class).ToList();
+        } catch(Exception e)
+        {
+        }
+        foreach (var member in  members)
+        {
+            yield return member;
+        }
+        foreach (var p in GetParents(_class).ToList())
+        {
+            members = null;
+            try 
+            {
+                members = EnumerateTSMembers(p).ToList();
+            } catch(Exception e)
+            {
+            }
+            if(members != null)
+            {
+                foreach (var member in  members)
+                {
+                        yield return member;
+                }
+            }
+        }
+    }
 
 	bool IsTSFlag(CodeElement e, Predicate<CodeAttribute> extra) { return HasAttribute(e, xa => xa.FullName.EndsWith("ToTSAttribute") && (extra == null || extra(xa))); }
     bool HasAttribute(CodeElement e, Predicate<CodeAttribute> _check) { return GetAttribute(e, _check) != null; }

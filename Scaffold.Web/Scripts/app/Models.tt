@@ -98,7 +98,8 @@ module <#=_namespace #> {
             }
 		}
 		Indent(2); Write("constructor(data?: I{0})",  _class.Name); WriteLine(" {");
-		foreach(var member in allMembers) 
+        Indent(3); WriteLine("this.ID = data ? data.ID : null;");
+        foreach(var member in allMembers) 
 		{
 			if (member.Kind == vsCMElement.vsCMElementProperty)
             {
@@ -127,9 +128,9 @@ module <#=_namespace #> {
         static GetAll(): JQueryPromise<Array<<#= _class.Name #>>> {
             var res = $.ajax(<#= _class.Name #>.ajaxSettings.build({
                 type: 'GET',
-                url: 'api/<#= _class.Name #>/GetAll',
-            })).then((items) => {
-                return items.map((item) => new <#= _class.Name #>(item));
+                url: '/api/<#= _class.Name #>/GetAll',
+            })).then((models) => {
+                return models.map((model) => new <#= _class.Name #>(model));
             });
             return res;
         }
@@ -137,8 +138,8 @@ module <#=_namespace #> {
         static Get(id: number): JQueryPromise<<#= _class.Name #>> {
             var res = $.ajax(<#= _class.Name #>.ajaxSettings.build({
                 type: 'GET',
-                url: 'api/<#= _class.Name #>/Get/'+id,
-            }));
+                url: '/api/<#= _class.Name #>/Get/'+id,
+            })).then((model) => new <#= _class.Name #>(model));
             return res;
         }
                 <#
@@ -148,26 +149,33 @@ module <#=_namespace #> {
             {
                 #>
 
-        Save(): JQueryPromise<<#= _class.Name #>> {
+        Save(): JQueryPromise<void> {
+            var isNew = this.ID == null;
+            var model = this;
             var res = $.ajax(<#= _class.Name #>.ajaxSettings.build({
-                type: 'GET',
-                url: 'api/<#= _class.Name #>/GetAll',
-            }));
+                type: isNew ? 'POST' : 'PUT',
+                url: '/api/<#= _class.Name #>/'+(isNew ? 'Post' : 'Put'),
+                data: JSON.stringify(this)
+            })).then((id) => {
+                if(isNew){
+                    this.ID = id;
+                }
+            });
             return res;
         }
 
-        Delete(): JQueryPromise<<#= _class.Name #>> {
+        Delete(): JQueryPromise<void> {
             var res = $.ajax(<#= _class.Name #>.ajaxSettings.build({
                 type: 'DELETE',
-                url: 'api/<#= _class.Name #>/Delete?id='+this.ID,
+                url: '/api/<#= _class.Name #>/Delete/'+this.ID,
             }));
             return res;
         }
 
-        static Delete(id: number): JQueryPromise<<#= _class.Name #>> {
+        static Delete(id: number): JQueryPromise<void> {
             var res = $.ajax(<#= _class.Name #>.ajaxSettings.build({
                 type: 'GET',
-                url: 'api/<#= _class.Name #>/Get/'+id,
+                url: '/api/<#= _class.Name #>/Delete/'+id,
             }));
             return res;
         }
@@ -185,7 +193,7 @@ module <#=_namespace #> {
                 var tresult = GetReturnType(fct, true);
                 var method = GetMethod((CodeElement)member, true);
 
-                var url = string.Format("api/{0}/{1}", GetRouteName(_class.Name), member.Name);
+                var url = string.Format("/api/{0}/{1}", GetRouteName(_class.Name), member.Name);
                 var sb = new StringBuilder("");
                 bool first = true;
                 for (int i = 0; i<fct.Parameters.Count; i++) {
