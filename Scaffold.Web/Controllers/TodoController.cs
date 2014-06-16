@@ -18,5 +18,15 @@ namespace App.Controllers
         {
             return 0;
         }
+
+        public int PostBody([FromBody] Todo todo) 
+        {
+            return 0;
+        }
+
+        public int PostBody2([FromBody] Model2 todo) 
+        {
+            return 0;
+        }
     }
 }

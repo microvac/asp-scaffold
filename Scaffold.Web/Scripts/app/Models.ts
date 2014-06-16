@@ -26,6 +26,22 @@ module Scaffold {
 }
 
 module App.Models {
+    // C:\Workspace\vstudio\Scaffold\Scaffold.Web\Models\Model2.cs: 10
+    export interface IModel2 {
+        ID: number;
+        Description: string;
+    }
+
+    export class Model2 {
+        public static ajaxSettings = new Scaffold.AjaxSettings();
+        ID: number;
+        Description: string;
+        constructor(data?: IModel2) {
+            this.ID = data ? data.ID : null;
+            this.Description = data ? data.Description : null;
+        }
+    }
+
     // C:\Workspace\vstudio\Scaffold\Scaffold.Web\Models\Todo.cs: 10
     export interface ITodo {
         ID: number;
@@ -95,10 +111,28 @@ module App.Models {
             return res;
         }
                 
-        GetAduh(): JQueryPromise<number> {
+        static GetAduh(): JQueryPromise<number> {
             var res = $.ajax(Todo.ajaxSettings.build({
                 type: 'GET',
                 url: '/api/Todo/GetAduh',
+            }));
+            return res;
+        }
+
+        PostBody(): JQueryPromise<number> {
+            var res = $.ajax(Todo.ajaxSettings.build({
+                type: 'POST',
+                url: '/api/Todo/PostBody',
+                data: JSON.stringify(this),
+            }));
+            return res;
+        }
+
+        static PostBody2(/** [FromBody] **/todo: App.Models.IModel2): JQueryPromise<number> {
+            var res = $.ajax(Todo.ajaxSettings.build({
+                type: 'POST',
+                url: '/api/Todo/PostBody2',
+                data: JSON.stringify(todo),
             }));
             return res;
         }

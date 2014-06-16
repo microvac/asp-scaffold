@@ -211,12 +211,32 @@ module <#=_namespace #> {
                 url += sb.ToString();
 
                 WriteLine("");
-                Indent(2); Write("{0}(", fct.Name); 
+                var hasFromBodyAndSameClass = false;
                 for (int i = 0; i<fct.Parameters.Count; i++) {
-                    if (i>0)
-                        Write(", ");
                     var p = (CodeParameter)fct.Parameters.Item(i+1);
                     if (HasAttribute((CodeElement)p, xa => xa.Name == "FromBody")) {
+                        var pt = GetTSType(p);
+                        if(p.Type.AsString == _class.FullName)
+                            hasFromBodyAndSameClass = true;
+                    }
+                }
+                Indent(2); 
+                if(!hasFromBodyAndSameClass)
+                {
+                    Write("static ");
+                }
+                Write("{0}(", fct.Name); 
+                for (int i = 0; i<fct.Parameters.Count; i++) {
+                    var p = (CodeParameter)fct.Parameters.Item(i+1);
+                    if (HasAttribute((CodeElement)p, xa => xa.Name == "FromBody")) {
+                        if(hasFromBodyAndSameClass)
+                            continue;
+                    }
+                    if (i>0)
+                        Write(", ");
+                    if (HasAttribute((CodeElement)p, xa => xa.Name == "FromBody")) {
+                        if(hasFromBodyAndSameClass)
+                            continue;
                         Write("/** [FromBody] **/");
                     }
                     var pt = GetTSType(p);
@@ -235,9 +255,16 @@ module <#=_namespace #> {
                             WriteLine("error: GET methods don't support FromBody parameters.");
                         }
                         else {
-                            Indent(3);
+                            Indent(4);
                             Write("data: JSON.stringify(");
-                            Write(p.Name);
+                            if(hasFromBodyAndSameClass)
+                            {
+                                Write("this");
+                            }
+                            else 
+                            {
+                                Write(p.Name);
+                            }
                             WriteLine("),");
                         }
                         break;
