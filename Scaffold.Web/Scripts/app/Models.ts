@@ -26,7 +26,6 @@ module Scaffold {
 }
 
 module App.Models {
-    // C:\Workspace\vstudio\Scaffold\Scaffold.Web\Models\Model2.cs: 10
     export interface IModel2 {
         ID: number;
         Description: string;
@@ -42,7 +41,6 @@ module App.Models {
         }
     }
 
-    // C:\Workspace\vstudio\Scaffold\Scaffold.Web\Models\Todo.cs: 10
     export interface ITodo {
         ID: number;
         Name: string;

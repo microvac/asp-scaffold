@@ -41,7 +41,7 @@ module <#=_namespace #> {
 	foreach (var _class in jsoncls) 
 	{
 		var elem = (CodeElement)_class;
-		Indent(1); WriteLine("// {0}: {1}", elem.ProjectItem.FileNames[0], elem.StartPoint.Line);
+		//Indent(1); WriteLine("// {0}: {1}", elem.ProjectItem.FileNames[0], elem.StartPoint.Line);
 
         Indent(1); Write("export interface {0}{1}", "I", _class.Name); 
         if (_class.Bases.Count > 0)
