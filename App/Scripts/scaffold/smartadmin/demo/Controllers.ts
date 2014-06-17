@@ -26,7 +26,7 @@ module Smartadmin.Demo {
         }
     });
 
-    app.controller("FlotController", function ($scope) {
+    app.controller("GraphController", function ($scope) {
         var data = [[],[]],
             totalPoints = 300;
 

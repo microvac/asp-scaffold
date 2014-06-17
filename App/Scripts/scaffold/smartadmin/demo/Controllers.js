@@ -25,7 +25,7 @@ var Smartadmin;
             };
         });
 
-        Demo.app.controller("FlotController", function ($scope) {
+        Demo.app.controller("GraphController", function ($scope) {
             var data = [[], []], totalPoints = 300;
 
             function getRandomData(i) {

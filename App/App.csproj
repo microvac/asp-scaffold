@@ -650,8 +650,9 @@
     <Content Include="Views\Scaffold\Smartadmin\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Scaffold\Smartadmin\Partials\Flot.cshtml" />
+    <Content Include="Views\Scaffold\Smartadmin\Partials\Graph.cshtml" />
     <Content Include="Views\Scaffold\Smartadmin\Partials\Index.cshtml" />
+    <Content Include="Views\Scaffold\Smartadmin\Partials\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app\app.css">

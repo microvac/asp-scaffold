@@ -15,9 +15,9 @@
                 $routeProvider.when('/scaffold/smartadmin/', {
                     templateUrl: '/scaffold/smartadmin/partials/Index',
                     controller: 'IndexController'
-                }).when('/scaffold/smartadmin/flot', {
-                    templateUrl: '/scaffold/smartadmin/partials/Flot',
-                    controller: 'FlotController'
+                }).when('/scaffold/smartadmin/graph', {
+                    templateUrl: '/scaffold/smartadmin/partials/Graph',
+                    controller: 'GraphController'
                 }).otherwise({
                     templateUrl: '/scaffold/smartadmin/partials/NotFound',
                     controller: 'StaticController'
