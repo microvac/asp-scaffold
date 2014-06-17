@@ -9,15 +9,22 @@
  */
 
 
-interface Window { todos: any }
 module App.Todo {
     import app = App.app;
     import Todo = App.Models.Todo;
+    import Anu = App.Models.Anu;
+
+    var anu = new Anu();
+    anu.Dua = 3;
+    anu.Satu = 1;
+    anu.PostCount().done((hasil) => {
+        anu.Satu = hasil;
+        anu.Dua = hasil;
+    })
 
     app.controller("TodoCtrl", function ($scope) {
         Todo.GetAll().done(todos => {
             $scope.$apply(() => {
-                window.todos = todos;
                 $scope.todos = todos;
             });
         });

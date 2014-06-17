@@ -16,6 +16,10 @@ namespace App.Configs
             bundles.Add(new StyleBundle("~/css/app")
                 .Include("~/Content/app/app.css"));
 
+            bundles.Add(new StyleBundle("~/css/smartadmin")
+                .Include("~/Content/smartadmin/smartadmin-production.css")
+                .Include("~/Content/smartadmin/smartadmin-skins.css"));
+
             // Script Bundles
 
             bundles.Add(new ScriptBundle("~/js/libraries")

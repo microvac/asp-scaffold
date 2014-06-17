@@ -29,7 +29,89 @@ var Scaffold;
 var App;
 (function (App) {
     (function (Models) {
-        
+        var Anu = (function () {
+            function Anu(data) {
+                this.ID = data ? data.ID : null;
+                this.Satu = data ? data.Satu : null;
+                this.Dua = data ? data.Dua : null;
+            }
+            /* App.Controllers.AnuController */
+            Anu.GetAll = function () {
+                var res = $.ajax(Anu.ajaxSettings.build({
+                    type: 'GET',
+                    url: '/api/Anu/GetAll'
+                })).then(function (models) {
+                    return models.map(function (model) {
+                        return new Anu(model);
+                    });
+                });
+                return res;
+            };
+
+            Anu.Get = function (id) {
+                var res = $.ajax(Anu.ajaxSettings.build({
+                    type: 'GET',
+                    url: '/api/Anu/Get/' + id
+                })).then(function (model) {
+                    return new Anu(model);
+                });
+                return res;
+            };
+
+            Anu.prototype.Save = function () {
+                var _this = this;
+                var isNew = this.ID == null;
+                var model = this;
+                var res = $.ajax(Anu.ajaxSettings.build({
+                    type: isNew ? 'POST' : 'PUT',
+                    url: '/api/Anu/' + (isNew ? 'Post' : 'Put'),
+                    data: JSON.stringify(this)
+                })).then(function (id) {
+                    if (isNew) {
+                        _this.ID = id;
+                    }
+                });
+                return res;
+            };
+
+            Anu.prototype.Delete = function () {
+                var res = $.ajax(Anu.ajaxSettings.build({
+                    type: 'DELETE',
+                    url: '/api/Anu/Delete/' + this.ID
+                }));
+                return res;
+            };
+
+            Anu.Delete = function (id) {
+                var res = $.ajax(Anu.ajaxSettings.build({
+                    type: 'GET',
+                    url: '/api/Anu/Delete/' + id
+                }));
+                return res;
+            };
+
+            Anu.prototype.PostCount = function () {
+                var res = $.ajax(Anu.ajaxSettings.build({
+                    type: 'POST',
+                    url: '/api/Anu/PostCount',
+                    data: JSON.stringify(this)
+                }));
+                return res;
+            };
+            Anu.ajaxSettings = new Scaffold.AjaxSettings();
+            return Anu;
+        })();
+        Models.Anu = Anu;
+
+        var Model2 = (function () {
+            function Model2(data) {
+                this.ID = data ? data.ID : null;
+                this.Description = data ? data.Description : null;
+            }
+            Model2.ajaxSettings = new Scaffold.AjaxSettings();
+            return Model2;
+        })();
+        Models.Model2 = Model2;
 
         var Todo = (function () {
             function Todo(data) {
@@ -92,10 +174,28 @@ var App;
                 return res;
             };
 
-            Todo.prototype.GetAduh = function () {
+            Todo.GetAduh = function () {
                 var res = $.ajax(Todo.ajaxSettings.build({
                     type: 'GET',
                     url: '/api/Todo/GetAduh'
+                }));
+                return res;
+            };
+
+            Todo.prototype.PostBody = function () {
+                var res = $.ajax(Todo.ajaxSettings.build({
+                    type: 'POST',
+                    url: '/api/Todo/PostBody',
+                    data: JSON.stringify(this)
+                }));
+                return res;
+            };
+
+            Todo.PostBody2 = function (/** [FromBody] **/ todo) {
+                var res = $.ajax(Todo.ajaxSettings.build({
+                    type: 'POST',
+                    url: '/api/Todo/PostBody2',
+                    data: JSON.stringify(todo)
                 }));
                 return res;
             };

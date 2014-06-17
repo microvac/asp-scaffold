@@ -15,6 +15,7 @@ namespace App.Models
         }
 
         public virtual IDbSet<Todo> Todos { get; set; }
+        public virtual IDbSet<Anu> Anus { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

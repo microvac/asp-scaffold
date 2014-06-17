@@ -26,6 +26,84 @@ module Scaffold {
 }
 
 module App.Models {
+    export interface IAnu {
+        ID: number;
+        Satu: number;
+        Dua: number;
+    }
+
+    export class Anu {
+        public static ajaxSettings = new Scaffold.AjaxSettings();
+        ID: number;
+        Satu: number;
+        Dua: number;
+        constructor(data?: IAnu) {
+            this.ID = data ? data.ID : null;
+            this.Satu = data ? data.Satu : null;
+            this.Dua = data ? data.Dua : null;
+        }
+
+        /* App.Controllers.AnuController */
+
+        static GetAll(): JQueryPromise<Array<Anu>> {
+            var res = $.ajax(Anu.ajaxSettings.build({
+                type: 'GET',
+                url: '/api/Anu/GetAll',
+            })).then((models) => {
+                return models.map((model) => new Anu(model));
+            });
+            return res;
+        }
+
+        static Get(id: number): JQueryPromise<Anu> {
+            var res = $.ajax(Anu.ajaxSettings.build({
+                type: 'GET',
+                url: '/api/Anu/Get/'+id,
+            })).then((model) => new Anu(model));
+            return res;
+        }
+                
+        Save(): JQueryPromise<void> {
+            var isNew = this.ID == null;
+            var model = this;
+            var res = $.ajax(Anu.ajaxSettings.build({
+                type: isNew ? 'POST' : 'PUT',
+                url: '/api/Anu/'+(isNew ? 'Post' : 'Put'),
+                data: JSON.stringify(this)
+            })).then((id) => {
+                if(isNew){
+                    this.ID = id;
+                }
+            });
+            return res;
+        }
+
+        Delete(): JQueryPromise<void> {
+            var res = $.ajax(Anu.ajaxSettings.build({
+                type: 'DELETE',
+                url: '/api/Anu/Delete/'+this.ID,
+            }));
+            return res;
+        }
+
+        static Delete(id: number): JQueryPromise<void> {
+            var res = $.ajax(Anu.ajaxSettings.build({
+                type: 'GET',
+                url: '/api/Anu/Delete/'+id,
+            }));
+            return res;
+        }
+                
+        PostCount(): JQueryPromise<number> {
+            var res = $.ajax(Anu.ajaxSettings.build({
+                type: 'POST',
+                url: '/api/Anu/PostCount',
+                data: JSON.stringify(this),
+            }));
+            return res;
+        }
+    }
+
     export interface IModel2 {
         ID: number;
         Description: string;
