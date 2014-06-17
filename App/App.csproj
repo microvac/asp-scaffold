@@ -603,8 +603,8 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="Views\App\_Layout.cshtml" />
-    <Content Include="Views\Smartadmin\_Layout.cshtml" />
-    <Content Include="Views\Smartadmin\Index.cshtml" />
+    <Content Include="Views\Scaffold\Smartadmin\_Layout.cshtml" />
+    <Content Include="Views\Scaffold\Smartadmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app\app.css">

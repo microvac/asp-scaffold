@@ -12,7 +12,7 @@ namespace App.Controllers.Scaffold
     {
         public ActionResult Index()
         {
-            return View();
+            return View("~/Views/Scaffold/Smartadmin/Index.cshtml");
         }
     }
 }
