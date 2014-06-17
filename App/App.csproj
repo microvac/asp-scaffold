@@ -185,6 +185,7 @@
     <Compile Include="Configs\RouteConfig.cs" />
     <Compile Include="Configs\WebApiConfig.cs" />
     <Compile Include="Controllers\Controller.cs" />
+    <Compile Include="Controllers\Demo.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AnuController.cs" />
     <Compile Include="Controllers\TodoController.cs" />
@@ -197,6 +198,9 @@
     <Compile Include="Models\Model2.cs" />
     <Compile Include="Models\Todo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Content\app\imports.css">
+      <DependentUpon>imports.less</DependentUpon>
+    </Content>
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\smartadmin\smartadmin-production.css" />
@@ -298,6 +302,10 @@
     <Content Include="Content\fontawesome\extras.less" />
     <Content Include="Content\fontawesome\core.less" />
     <Content Include="Content\fontawesome\bordered-pulled.less" />
+    <Content Include="Content\app\imports.less" />
+    <Content Include="Content\app\imports.css.map">
+      <DependentUpon>imports.css</DependentUpon>
+    </Content>
     <None Include="Scripts\app\T4Utils.t4" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -623,6 +631,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Demo\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
