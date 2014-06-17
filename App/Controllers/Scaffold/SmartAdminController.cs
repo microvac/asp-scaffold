@@ -14,5 +14,10 @@ namespace App.Controllers.Scaffold
         {
             return View("~/Views/Scaffold/Smartadmin/Index.cshtml");
         }
+
+        public ActionResult Partials(String fileName)
+        {
+            return PartialView(String.Format("~/Views/Scaffold/Smartadmin/Partials/{0}.cshtml", fileName));
+        }
     }
 }

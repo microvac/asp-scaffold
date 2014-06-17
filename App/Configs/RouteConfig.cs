@@ -14,9 +14,14 @@ namespace App.Configs
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
-                name: "Scaffold",
-                url: "scaffold/{controller}/{action}/{id}",
-                defaults: new { controller = "SmartAdmin", action = "Index", id = UrlParameter.Optional }
+                name: "Smartadmin Partials",
+                url: "scaffold/smartadmin/partials/{*fileName}",
+                defaults: new { controller = "SmartAdmin", action = "Partials", fileName = UrlParameter.Optional }
+            );
+            routes.MapRoute(
+                name: "Smartadmin",
+                url: "scaffold/smartadmin/{*fileName}",
+                defaults: new { controller = "SmartAdmin", action = "Index", fileName = UrlParameter.Optional }
             );
             routes.MapRoute(
                 name: "Default",

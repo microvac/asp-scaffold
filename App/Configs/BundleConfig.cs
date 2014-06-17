@@ -26,7 +26,11 @@ namespace App.Configs
                 .Include("~/Scripts/jquery-{version}.js")
                 .Include("~/Scripts/bootstrap.js")
                 .Include("~/Scripts/angular.js")
-                .Include("~/Scripts/angular-classy.js"));
+                .Include("~/Scripts/angular-route.js"));
+
+            bundles.Add(new ScriptBundle("~/js/libraries/flot")
+                .Include("~/Scripts/flot/jquery.flot.js")
+                .Include("~/Scripts/scaffold/angular-flot/angular-flot.js"));
 
             bundles.Add(new ScriptBundle("~/js/app")
                 .Include("~/Scripts/scaffold/Models.js")
@@ -34,8 +38,11 @@ namespace App.Configs
                 .Include("~/Scripts/app/controllers/*.js")
                 .Include("~/Scripts/app/directives/*.js"));
 
+            bundles.Add(new ScriptBundle("~/js/smartadmin")
+                .Include("~/Scripts/scaffold/smartadmin/directives/*.js"));
+
             bundles.Add(new ScriptBundle("~/js/scaffold/smartadmin")
-                .Include("~/Scripts/scaffold/smartadmin/*.js"));
+                .Include("~/Scripts/scaffold/smartadmin/demo/*.js"));
         }
     }
 }

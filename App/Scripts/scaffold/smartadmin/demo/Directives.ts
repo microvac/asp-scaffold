@@ -1,11 +1,11 @@
-﻿/// <reference path="../../typings/angularjs/angular.d.ts"/>
+﻿/// <reference path="../../../typings/angularjs/angular.d.ts"/>
 /// <reference path="App.ts"/>
 
 /**
  * Directive that executes an expression when the element it is applied to loses focus
  */
-module Smartadmin {
-    Smartadmin.app.directive('todoBlur', function () {
+module Smartadmin.Demo {
+    app.directive('todoBlur', function () {
         return function (scope, elem, attrs) {
             elem.bind('blur', function () {
                 scope.$apply(attrs.todoBlur);

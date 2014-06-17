@@ -241,6 +241,41 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\flot\excanvas.js" />
+    <Content Include="Scripts\flot\excanvas.min.js" />
+    <Content Include="Scripts\flot\jquery.colorhelpers.js" />
+    <Content Include="Scripts\flot\jquery.colorhelpers.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.canvas.js" />
+    <Content Include="Scripts\flot\jquery.flot.canvas.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.categories.js" />
+    <Content Include="Scripts\flot\jquery.flot.categories.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.crosshair.js" />
+    <Content Include="Scripts\flot\jquery.flot.crosshair.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.errorbars.js" />
+    <Content Include="Scripts\flot\jquery.flot.errorbars.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.fillbetween.js" />
+    <Content Include="Scripts\flot\jquery.flot.fillbetween.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.image.js" />
+    <Content Include="Scripts\flot\jquery.flot.image.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.js" />
+    <Content Include="Scripts\flot\jquery.flot.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.navigate.js" />
+    <Content Include="Scripts\flot\jquery.flot.navigate.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.pie.js" />
+    <Content Include="Scripts\flot\jquery.flot.pie.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.resize.js" />
+    <Content Include="Scripts\flot\jquery.flot.resize.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.selection.js" />
+    <Content Include="Scripts\flot\jquery.flot.selection.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.stack.js" />
+    <Content Include="Scripts\flot\jquery.flot.stack.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.symbol.js" />
+    <Content Include="Scripts\flot\jquery.flot.symbol.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.threshold.js" />
+    <Content Include="Scripts\flot\jquery.flot.threshold.min.js" />
+    <Content Include="Scripts\flot\jquery.flot.time.js" />
+    <Content Include="Scripts\flot\jquery.flot.time.min.js" />
+    <Content Include="Scripts\scaffold\angular-flot\angular-flot.js" />
     <Content Include="Scripts\scaffold\Models.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Models.ts</LastGenOutput>
@@ -313,6 +348,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\scaffold\angular-flot\.npmignore" />
+    <Content Include="Scripts\scaffold\angular-flot\angular-flot.coffee" />
+    <Content Include="Scripts\scaffold\angular-flot\AUTHORS" />
+    <Content Include="Scripts\scaffold\angular-flot\bower.json" />
+    <Content Include="Scripts\scaffold\angular-flot\LICENSE" />
+    <Content Include="Scripts\scaffold\angular-flot\package.json" />
+    <Content Include="Scripts\scaffold\angular-flot\README.md" />
     <None Include="Scripts\scaffold\T4Utils.t4" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -605,6 +647,10 @@
     <Content Include="Views\App\_Layout.cshtml" />
     <Content Include="Views\Scaffold\Smartadmin\_Layout.cshtml" />
     <Content Include="Views\Scaffold\Smartadmin\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Scaffold\Smartadmin\Partials\Flot.cshtml" />
+    <Content Include="Views\Scaffold\Smartadmin\Partials\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app\app.css">
@@ -651,9 +697,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.tt</DependentUpon>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\App.ts" />
-    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\IndexController.ts" />
-    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\Directives.ts" />
+    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\demo\App.ts" />
+    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\demo\Controllers.ts" />
+    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\demo\Directives.ts" />
+    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\directives\Flot.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
