@@ -19,7 +19,8 @@ module Smartadmin.Demo {
                     controller: 'FlotController'
                 }).
                 otherwise({
-                    redirectTo: '/scaffold/smartadmin/'
+                    templateUrl: '/scaffold/smartadmin/partials/NotFound',
+                    controller: 'StaticController'
                 });
         }]).run(function () {
             console.log("run");

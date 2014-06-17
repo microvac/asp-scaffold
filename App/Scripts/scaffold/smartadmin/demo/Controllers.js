@@ -10,6 +10,8 @@ var Smartadmin;
     (function (Demo) {
         Demo.app.controller("IndexController", function ($scope) {
         });
+        Demo.app.controller("StaticController", function ($scope) {
+        });
 
         Demo.app.controller("FlotController", function ($scope) {
             var data = [[], []], totalPoints = 300;

@@ -11,6 +11,8 @@
 module Smartadmin.Demo {
     app.controller("IndexController", function ($scope) {
     });
+    app.controller("StaticController", function ($scope) {
+    });
 
     app.controller("FlotController", function ($scope) {
         var data = [[],[]],

@@ -19,7 +19,8 @@
                     templateUrl: '/scaffold/smartadmin/partials/Flot',
                     controller: 'FlotController'
                 }).otherwise({
-                    redirectTo: '/scaffold/smartadmin/'
+                    templateUrl: '/scaffold/smartadmin/partials/NotFound',
+                    controller: 'StaticController'
                 });
             }]).run(function () {
             console.log("run");
