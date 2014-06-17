@@ -12,6 +12,18 @@ var Smartadmin;
         });
         Demo.app.controller("StaticController", function ($scope) {
         });
+        Demo.app.controller("NavController", function ($scope, $location) {
+            var basePath = "/scaffold/smartadmin/";
+            $scope.getClass = function (path) {
+                if (path == "" && $location.path() == "/scaffold/smartadmin")
+                    return "active";
+                var fullPath = basePath + path;
+                if ($location.path() == fullPath) {
+                    return "active";
+                }
+                return "";
+            };
+        });
 
         Demo.app.controller("FlotController", function ($scope) {
             var data = [[], []], totalPoints = 300;
@@ -43,9 +55,11 @@ var Smartadmin;
 
             var updateInterval = 30;
 
+            $scope.flotData = {};
+
             function update() {
                 $scope.$apply(function () {
-                    $scope.myData = [getRandomData(0), getRandomData(1)];
+                    $scope.flotData.data = [getRandomData(0), getRandomData(1)];
                 });
 
                 setTimeout(update, updateInterval);
@@ -61,8 +75,8 @@ var Smartadmin;
             var $chrt_fifth = "#BD362F";
             var $chrt_mono = "#000";
 
-            $scope.myData = [getRandomData(0), getRandomData(1)];
-            $scope.myChartOptions = {
+            $scope.flotData.data = [getRandomData(0), getRandomData(1)];
+            $scope.flotData.options = {
                 series: {
                     lines: {
                         show: true

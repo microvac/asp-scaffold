@@ -306,11 +306,11 @@ Use search to find needed section.
             traditional href="" links. See documentation for details.
             -->
 
-            <ul style="">
-                <li class="active">
+            <ul style="" ng-controller="NavController">
+                <li ng-class="getClass('')">
                     <a href="./" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
                 </li>
-                <li>
+                <li ng-class="getClass('flot')">
                     <a href="flot"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item">Graphs</span></a>
                 </li>
                 <li>
