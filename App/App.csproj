@@ -185,8 +185,8 @@
     <Compile Include="Configs\RouteConfig.cs" />
     <Compile Include="Configs\WebApiConfig.cs" />
     <Compile Include="Controllers\Controller.cs" />
-    <Compile Include="Controllers\Demo.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\Scaffold\SmartAdminController.cs" />
+    <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\AnuController.cs" />
     <Compile Include="Controllers\TodoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -201,14 +201,18 @@
     <Content Include="Content\app\imports.css">
       <DependentUpon>imports.less</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\smartadmin\smartadmin-production.css" />
-    <Content Include="Content\smartadmin\smartadmin-skins.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\scaffold\smartadmin\smartadmin-production.css" />
+    <Content Include="Content\scaffold\smartadmin\smartadmin-skins.css" />
     <Content Include="Devart.Data.PostgreSql.Entity.Spatials.xml" />
     <Content Include="Devart.Data.PostgreSql.Entity.xml" />
     <Content Include="Devart.Data.PostgreSql.xml" />
     <Content Include="Devart.Data.xml" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-cookies.js" />
@@ -237,7 +241,7 @@
     <Content Include="Scripts\angular-cookies.min.js.map" />
     <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\app\Models.tt">
+    <Content Include="Scripts\scaffold\Models.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Models.ts</LastGenOutput>
     </Content>
@@ -306,7 +310,10 @@
     <Content Include="Content\app\imports.css.map">
       <DependentUpon>imports.css</DependentUpon>
     </Content>
-    <None Include="Scripts\app\T4Utils.t4" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Scripts\scaffold\T4Utils.t4" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\errors.json" />
@@ -592,8 +599,12 @@
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\version.json" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Views\App\_Layout.cshtml" />
+    <Content Include="Views\Smartadmin\_Layout.cshtml" />
+    <Content Include="Views\Smartadmin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\app\app.css">
@@ -624,25 +635,25 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\404.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\App\Index.cshtml" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Demo\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\app\App.ts" />
-    <TypeScriptCompile Include="Scripts\app\Models.ts">
+    <TypeScriptCompile Include="Scripts\scaffold\Models.ts">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.tt</DependentUpon>
     </TypeScriptCompile>
+    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\App.ts" />
+    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\IndexController.ts" />
+    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\Directives.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />

@@ -17,8 +17,8 @@ namespace App.Configs
                 .Include("~/Content/app/app.css"));
 
             bundles.Add(new StyleBundle("~/css/smartadmin")
-                .Include("~/Content/smartadmin/smartadmin-production.css")
-                .Include("~/Content/smartadmin/smartadmin-skins.css"));
+                .Include("~/Content/scaffold/smartadmin/smartadmin-production.css")
+                .Include("~/Content/scaffold/smartadmin/smartadmin-skins.css"));
 
             // Script Bundles
 
@@ -29,10 +29,13 @@ namespace App.Configs
                 .Include("~/Scripts/angular-classy.js"));
 
             bundles.Add(new ScriptBundle("~/js/app")
-                .Include("~/Scripts/app/Models.js")
+                .Include("~/Scripts/scaffold/Models.js")
                 .Include("~/Scripts/app/App.js")
                 .Include("~/Scripts/app/controllers/*.js")
                 .Include("~/Scripts/app/directives/*.js"));
+
+            bundles.Add(new ScriptBundle("~/js/scaffold/smartadmin")
+                .Include("~/Scripts/scaffold/smartadmin/*.js"));
         }
     }
 }

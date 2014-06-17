@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using App.Models;
 using System.Data.Entity;
 
-namespace App.Controllers
+namespace App.Controllers.Scaffold
 {
-    public class DemoController : Controller
+    public class SmartAdminController : Controller
     {
         public ActionResult Index()
         {

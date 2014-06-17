@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 namespace App.Controllers
 {
-    public class HomeController : Controller
+    public class AppController : Controller
     {
         public ActionResult Index()
         {

@@ -1,14 +1,11 @@
 ﻿/// <reference path="../../typings/angularjs/angular.d.ts"/>
-/// <reference path="../../scaffold/Models.ts"/>
-/// <reference path="../App.ts"/>
-
+/// <reference path="App.ts"/>
 /**
- * Directive that executes an expression when the element it is applied to loses focus
- */
-module App.Todo {
-    import app = App.app;
-    
-    app.directive('todoBlur', function () {
+* Directive that executes an expression when the element it is applied to loses focus
+*/
+var Smartadmin;
+(function (Smartadmin) {
+    Smartadmin.app.directive('todoBlur', function () {
         return function (scope, elem, attrs) {
             elem.bind('blur', function () {
                 scope.$apply(attrs.todoBlur);
@@ -17,10 +14,10 @@ module App.Todo {
     });
 
     /**
-     * Directive that executes an expression when the element it is applied to gets
-     * an `escape` keydown event.
-     */
-    app.directive('todoBlur', function () {
+    * Directive that executes an expression when the element it is applied to gets
+    * an `escape` keydown event.
+    */
+    Smartadmin.app.directive('todoBlur', function () {
         var ESCAPE_KEY = 27;
         return function (scope, elem, attrs) {
             elem.bind('keydown', function (event) {
@@ -32,9 +29,9 @@ module App.Todo {
     });
 
     /**
-     * Directive that places focus on the element it is applied to when the expression it binds to evaluates to true
-     */
-    app.directive('todoFocus', function todoFocus($timeout) {
+    * Directive that places focus on the element it is applied to when the expression it binds to evaluates to true
+    */
+    Smartadmin.app.directive('todoFocus', function todoFocus($timeout) {
         return function (scope, elem, attrs) {
             scope.$watch(attrs.todoFocus, function (newVal) {
                 if (newVal) {
@@ -45,4 +42,5 @@ module App.Todo {
             });
         };
     });
-}
+})(Smartadmin || (Smartadmin = {}));
+//# sourceMappingURL=Directives.js.map

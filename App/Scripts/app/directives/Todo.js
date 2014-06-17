@@ -1,5 +1,5 @@
 ﻿/// <reference path="../../typings/angularjs/angular.d.ts"/>
-/// <reference path="../Models.ts"/>
+/// <reference path="../../scaffold/Models.ts"/>
 /// <reference path="../App.ts"/>
 var App;
 (function (App) {
