@@ -355,6 +355,7 @@
     <Content Include="Scripts\scaffold\angular-flot\LICENSE" />
     <Content Include="Scripts\scaffold\angular-flot\package.json" />
     <Content Include="Scripts\scaffold\angular-flot\README.md" />
+    <Content Include="Scripts\scaffold\sparkline\jquery.sparkline.js" />
     <None Include="Scripts\scaffold\T4Utils.t4" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -701,6 +702,7 @@
     <TypeScriptCompile Include="Scripts\scaffold\smartadmin\demo\Controllers.ts" />
     <TypeScriptCompile Include="Scripts\scaffold\smartadmin\demo\Directives.ts" />
     <TypeScriptCompile Include="Scripts\scaffold\smartadmin\directives\Flot.ts" />
+    <Content Include="Scripts\scaffold\sparkline\angular-sparkline.js" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />

@@ -32,6 +32,10 @@ namespace App.Configs
                 .Include("~/Scripts/flot/jquery.flot.js")
                 .Include("~/Scripts/scaffold/angular-flot/angular-flot.js"));
 
+            bundles.Add(new ScriptBundle("~/js/libraries/sparkline")
+                .Include("~/Scripts/scaffold/sparkline/jquery.sparkline.js")
+                .Include("~/Scripts/scaffold/sparkline/angular-sparkline.js"));
+
             bundles.Add(new ScriptBundle("~/js/app")
                 .Include("~/Scripts/scaffold/Models.js")
                 .Include("~/Scripts/app/App.js")

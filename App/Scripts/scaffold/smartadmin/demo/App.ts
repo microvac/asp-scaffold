@@ -2,7 +2,8 @@
 module Smartadmin.Demo {
     export var app = angular.module('app', [
         'ngRoute',
-        'angular-flot'
+        'angular-flot',
+        'angular-sparkline',
     ]);
 
     app.config(['$routeProvider', '$locationProvider',

@@ -4,7 +4,8 @@
     (function (Demo) {
         Demo.app = angular.module('app', [
             'ngRoute',
-            'angular-flot'
+            'angular-flot',
+            'angular-sparkline'
         ]);
 
         Demo.app.config([
