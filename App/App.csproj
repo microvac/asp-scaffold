@@ -50,35 +50,35 @@
     </Reference>
     <Reference Include="Devart.Data, Version=5.0.973.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotConnect.Postgres.Bajakan.1.0.0\lib\Devart.Data.dll</HintPath>
+      <HintPath>..\packages\DotConnect.Postgres.Bajakan.7.3.181.0\lib\Devart.Data.dll</HintPath>
     </Reference>
     <Reference Include="Devart.Data.Linq, Version=4.4.519.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotConnect.Postgres.Bajakan.1.0.0\lib\Devart.Data.Linq.dll</HintPath>
+      <HintPath>..\packages\DotConnect.Postgres.Bajakan.7.3.181.0\lib\Devart.Data.Linq.dll</HintPath>
     </Reference>
     <Reference Include="Devart.Data.Linq.Web, Version=4.4.519.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotConnect.Postgres.Bajakan.1.0.0\lib\Devart.Data.Linq.Web.dll</HintPath>
+      <HintPath>..\packages\DotConnect.Postgres.Bajakan.7.3.181.0\lib\Devart.Data.Linq.Web.dll</HintPath>
     </Reference>
     <Reference Include="Devart.Data.Linq.Web.DynamicData, Version=4.4.519.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotConnect.Postgres.Bajakan.1.0.0\lib\Devart.Data.Linq.Web.DynamicData.dll</HintPath>
+      <HintPath>..\packages\DotConnect.Postgres.Bajakan.7.3.181.0\lib\Devart.Data.Linq.Web.DynamicData.dll</HintPath>
     </Reference>
     <Reference Include="Devart.Data.PostgreSql, Version=7.3.181.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotConnect.Postgres.Bajakan.1.0.0\lib\Devart.Data.PostgreSql.dll</HintPath>
+      <HintPath>..\packages\DotConnect.Postgres.Bajakan.7.3.181.0\lib\Devart.Data.PostgreSql.dll</HintPath>
     </Reference>
     <Reference Include="Devart.Data.PostgreSql.Entity, Version=7.3.181.6, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotConnect.Postgres.Bajakan.1.0.0\lib\Devart.Data.PostgreSql.Entity.dll</HintPath>
+      <HintPath>..\packages\DotConnect.Postgres.Bajakan.7.3.181.0\lib\Devart.Data.PostgreSql.Entity.dll</HintPath>
     </Reference>
     <Reference Include="Devart.Data.PostgreSql.Entity.Spatials, Version=7.3.181.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotConnect.Postgres.Bajakan.1.0.0\lib\Devart.Data.PostgreSql.Entity.Spatials.dll</HintPath>
+      <HintPath>..\packages\DotConnect.Postgres.Bajakan.7.3.181.0\lib\Devart.Data.PostgreSql.Entity.Spatials.dll</HintPath>
     </Reference>
     <Reference Include="Devart.Data.PostgreSql.Linq, Version=4.4.519.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DotConnect.Postgres.Bajakan.1.0.0\lib\Devart.Data.PostgreSql.Linq.dll</HintPath>
+      <HintPath>..\packages\DotConnect.Postgres.Bajakan.7.3.181.0\lib\Devart.Data.PostgreSql.Linq.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -208,10 +208,6 @@
     <Content Include="Content\Site.css" />
     <Content Include="Content\scaffold\smartadmin\smartadmin-production.css" />
     <Content Include="Content\scaffold\smartadmin\smartadmin-skins.css" />
-    <Content Include="Devart.Data.PostgreSql.Entity.Spatials.xml" />
-    <Content Include="Devart.Data.PostgreSql.Entity.xml" />
-    <Content Include="Devart.Data.PostgreSql.xml" />
-    <Content Include="Devart.Data.xml" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
