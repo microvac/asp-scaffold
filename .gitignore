@@ -1,4 +1,6 @@
 # Created by http://www.gitignore.io
+# Scaffold Content
+App/Scaffold/
 
 ### VisualStudio ###
 ## Ignore Visual Studio temporary files, build results, and

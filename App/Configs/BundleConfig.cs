@@ -17,8 +17,8 @@ namespace App.Configs
                 .Include("~/Content/app/app.css"));
 
             bundles.Add(new StyleBundle("~/css/smartadmin")
-                .Include("~/Content/scaffold/smartadmin/smartadmin-production.css")
-                .Include("~/Content/scaffold/smartadmin/smartadmin-skins.css"));
+                .Include("~/Scaffold/Content/smartadmin/smartadmin-production.css")
+                .Include("~/Scaffold/Content/smartadmin/smartadmin-skins.css"));
 
             // Script Bundles
 
@@ -29,11 +29,11 @@ namespace App.Configs
                 .Include("~/Scaffold/Scripts/angular-route.js"));
 
             bundles.Add(new ScriptBundle("~/js/scaffold")
-                .Include("~/Scripts/Scaffold/Scaffold.js"));
+                .Include("~/Scaffold/Scripts/Scaffold/Scaffold.js"));
 
             bundles.Add(new ScriptBundle("~/js/scaffold/flot")
                 .Include("~/Scaffold/Scripts/flot/jquery.flot.js")
-                .Include("~/Scripts/Scaffold/Directives/flot.js"));
+                .Include("~/Scaffold/Scripts/Scaffold/Directives/flot.js"));
 
             bundles.Add(new ScriptBundle("~/js/scaffold/sparkline")
                 .Include("~/Scripts/Scaffold/Lib/jquery.sparkline.js")
@@ -46,7 +46,7 @@ namespace App.Configs
                 .Include("~/Scripts/App/Directives/*.js"));
 
             bundles.Add(new ScriptBundle("~/js/scaffold/smartadmin")
-                .Include("~/Scripts/Scaffold/Demo/Smartadmin/*.js"));
+                .Include("~/Scaffold/Scripts/Scaffold/Demo/Smartadmin/*.js"));
         }
     }
 }

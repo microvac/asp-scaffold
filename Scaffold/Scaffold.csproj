@@ -168,6 +168,11 @@
     <None Include="Scripts\errors.json" />
     <None Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\version.json" />
+    <Content Include="Content\smartadmin\smartadmin-production.css" />
+    <Content Include="Content\smartadmin\smartadmin-skins.css" />
+    <Content Include="Scripts\Scaffold\Directives\flot.js" />
+    <Content Include="Scripts\Scaffold\Directives\sparkline.js" />
+    <Content Include="Scripts\Scaffold\Lib\jquery.sparkline.js" />
     <Content Include="Views\Smartadmin\_Layout.cshtml" />
     <Content Include="Views\Smartadmin\Index.cshtml" />
     <Content Include="Views\Smartadmin\Partials\Graph.cshtml" />
@@ -520,6 +525,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Scripts\Scaffold\Demo\Smartadmin\App.ts" />
+    <TypeScriptCompile Include="Scripts\Scaffold\Demo\Smartadmin\Controllers.ts" />
+    <TypeScriptCompile Include="Scripts\Scaffold\Demo\Smartadmin\Directives.ts" />
+    <TypeScriptCompile Include="Scripts\Scaffold\Scaffold.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />
