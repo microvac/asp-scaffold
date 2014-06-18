@@ -1,9 +1,8 @@
 ﻿/// <reference path="../../../typings/angularjs/angular.d.ts"/>
-module Smartadmin.Demo {
+module Scaffold.Demo.Smartadmin {
     export var app = angular.module('app', [
         'ngRoute',
-        'angular-flot',
-        'angular-sparkline',
+        'scaffold',
     ]);
 
     app.config(['$routeProvider', '$locationProvider',

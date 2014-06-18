@@ -8,7 +8,7 @@
  */
 
 
-module Smartadmin.Demo {
+module Scaffold.Demo.Smartadmin {
     class IndexCtrl {
     }
     app.controller("IndexCtrl", IndexCtrl);

@@ -3,8 +3,7 @@
 // and jQuerySparklines from http://omnipotent.net/jquery.sparkline
 
 // AngularJS directives for jquery sparkline
-angular.module('angular-sparkline', []);
-angular.module('angular-sparkline')
+angular.module('scaffold')
     .directive('sparkline', [function () {
         'use strict';
 return {

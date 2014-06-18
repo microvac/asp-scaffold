@@ -275,8 +275,8 @@
     <Content Include="Scripts\flot\jquery.flot.threshold.min.js" />
     <Content Include="Scripts\flot\jquery.flot.time.js" />
     <Content Include="Scripts\flot\jquery.flot.time.min.js" />
-    <Content Include="Scripts\scaffold\angular-flot\angular-flot.js" />
-    <Content Include="Scripts\scaffold\Models.tt">
+    <Content Include="Scripts\Scaffold\Directives\flot.js" />
+    <Content Include="Scripts\Scaffold\Models.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Models.ts</LastGenOutput>
     </Content>
@@ -348,15 +348,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Scripts\scaffold\angular-flot\.npmignore" />
-    <Content Include="Scripts\scaffold\angular-flot\angular-flot.coffee" />
-    <Content Include="Scripts\scaffold\angular-flot\AUTHORS" />
-    <Content Include="Scripts\scaffold\angular-flot\bower.json" />
-    <Content Include="Scripts\scaffold\angular-flot\LICENSE" />
-    <Content Include="Scripts\scaffold\angular-flot\package.json" />
-    <Content Include="Scripts\scaffold\angular-flot\README.md" />
-    <Content Include="Scripts\scaffold\sparkline\jquery.sparkline.js" />
-    <None Include="Scripts\scaffold\T4Utils.t4" />
+    <Content Include="Scripts\Scaffold\Lib\jquery.sparkline.js" />
+    <None Include="Scripts\Scaffold\T4Utils.t4" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\errors.json" />
@@ -659,13 +652,13 @@
       <DependentUpon>app.less</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
-    <TypeScriptCompile Include="Scripts\app\directives\Todo.ts" />
+    <TypeScriptCompile Include="Scripts\App\Directives\Todo.ts" />
     <Content Include="Content\app\app.less" />
     <Content Include="Content\app\variables.less" />
     <Content Include="Content\app\app.css.map">
       <DependentUpon>app.css</DependentUpon>
     </Content>
-    <TypeScriptCompile Include="Scripts\app\controllers\TodoCtrl.ts" />
+    <TypeScriptCompile Include="Scripts\App\Controllers\TodoCtrl.ts" />
     <Content Include="Scripts\testing\config\testacular-unit-tests.conf.js" />
     <Content Include="Scripts\testing\jasmine\jasmine-html.js" />
     <Content Include="Scripts\testing\jasmine\jasmine.css" />
@@ -693,17 +686,17 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\app\App.ts" />
-    <TypeScriptCompile Include="Scripts\scaffold\Models.ts">
+    <TypeScriptCompile Include="Scripts\App\App.ts" />
+    <TypeScriptCompile Include="Scripts\Scaffold\Models.ts">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Models.tt</DependentUpon>
     </TypeScriptCompile>
-    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\demo\App.ts" />
-    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\demo\Controllers.ts" />
-    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\demo\Directives.ts" />
-    <TypeScriptCompile Include="Scripts\scaffold\smartadmin\directives\Flot.ts" />
-    <Content Include="Scripts\scaffold\sparkline\angular-sparkline.js" />
+    <TypeScriptCompile Include="Scripts\Scaffold\Demo\Smartadmin\App.ts" />
+    <TypeScriptCompile Include="Scripts\Scaffold\Demo\Smartadmin\Controllers.ts" />
+    <TypeScriptCompile Include="Scripts\Scaffold\Demo\Smartadmin\Directives.ts" />
+    <Content Include="Scripts\Scaffold\Directives\sparkline.js" />
+    <TypeScriptCompile Include="Scripts\Scaffold\Scaffold.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-animate.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-cookies.d.ts" />
     <TypeScriptCompile Include="Scripts\typings\angularjs\angular-mocks.d.ts" />

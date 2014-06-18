@@ -1,10 +1,10 @@
 ﻿/// <reference path="../../../typings/angularjs/angular.d.ts"/>
 /// <reference path="App.ts"/>
 
-/**
- * Directive that executes an expression when the element it is applied to loses focus
- */
-module Smartadmin.Demo {
+module Scaffold.Demo.Smartadmin {
+    /**
+     * Directive that executes an expression when the element it is applied to loses focus
+     */
     app.directive('todoBlur', function () {
         return function (scope, elem, attrs) {
             elem.bind('blur', function () {
