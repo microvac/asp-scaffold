@@ -12,12 +12,12 @@ namespace App.Controllers.Scaffold
     {
         public ActionResult Index()
         {
-            return View("~/Views/Scaffold/Smartadmin/Index.cshtml");
+            return View("~/Scaffold/Views/Smartadmin/Index.cshtml");
         }
 
         public ActionResult Partials(String fileName)
         {
-            return PartialView(String.Format("~/Views/Scaffold/Smartadmin/Partials/{0}.cshtml", fileName));
+            return PartialView(String.Format("~/Scaffold/Views/Smartadmin/Partials/{0}.cshtml", fileName));
         }
     }
 }

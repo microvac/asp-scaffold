@@ -168,6 +168,12 @@
     <None Include="Scripts\errors.json" />
     <None Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\version.json" />
+    <Content Include="Views\Smartadmin\_Layout.cshtml" />
+    <Content Include="Views\Smartadmin\Index.cshtml" />
+    <Content Include="Views\Smartadmin\Partials\Graph.cshtml" />
+    <Content Include="Views\Smartadmin\Partials\Index.cshtml" />
+    <Content Include="Views\Smartadmin\Partials\NotFound.cshtml" />
+    <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
