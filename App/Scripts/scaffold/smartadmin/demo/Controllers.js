@@ -120,15 +120,13 @@ var Smartadmin;
 
                 function update() {
                     $scope.$apply(function () {
-                        $scope.flotData.data = [generator1.generate(), generator2.generate()];
+                        $scope.flotData = [generator1.generate(), generator2.generate()];
                     });
                     setTimeout(update, updateInterval);
                 }
 
-                $scope.flotData = {
-                    data: [generator1.generate(), generator2.generate()],
-                    options: flotOptions
-                };
+                $scope.flotOptions = flotOptions;
+                $scope.flotData = [generator1.generate(), generator2.generate()];
 
                 setTimeout(update, updateInterval);
             }

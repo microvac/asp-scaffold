@@ -27,6 +27,8 @@ angular.module('angular-flot', []).directive('flot', function() {
         width: width,
         height: height
       });
+      console.log(plotArea);
+      console.log(height);
       init = function() {
         return $.plot(plotArea, scope.dataset, scope.options);
       };
