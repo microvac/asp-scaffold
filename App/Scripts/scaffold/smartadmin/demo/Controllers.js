@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/angularjs/angular.d.ts"/>
+﻿/// <reference path="../../../typings/angularjs/angular.d.ts"/>
 /// <reference path="App.ts"/>
 var Smartadmin;
 (function (Smartadmin) {
@@ -114,6 +114,10 @@ var Smartadmin;
         var GraphCtrl = (function () {
             function GraphCtrl($scope) {
                 this.$scope = $scope;
+                $scope.sparkline1 = [1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471];
+                $scope.sparkline2 = [110, 150, 300, 130, 400, 240, 220, 310, 220, 300, 270, 210];
+                $scope.sparkline3 = [110, 150, 300, 130, 400, 240, 220, 310, 220, 300, 270, 210];
+
                 var updateInterval = 30;
                 var generator1 = new RandomDataGenerator(100);
                 var generator2 = new RandomDataGenerator(100);

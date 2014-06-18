@@ -8,25 +8,35 @@ angular.module('angular-sparkline')
     .directive('sparkline', [function () {
         'use strict';
 return {
-            restrict: 'A',
+            restrict: 'E',
             //require: 'ngModel',
             compile: function(tElement,tAttrs,transclude){
                 var render= function(scope,element,attrs){
                     var elem = element;
                     var a, b, c, d, e, f;
-                    var tb = $(elem),
-                    ub = tb.data("sparkline-type") || "bar";
-                    if ("bar" == ub && (a = tb.data("sparkline-bar-color") || tb.css("color") || "#0000f0", b = tb.data("sparkline-height") || "26px", c = tb.data("sparkline-barwidth") || 5, d = tb.data("sparkline-barspacing") || 2, e = tb.data("sparkline-negbar-color") || "#A90329", f = tb.data("sparkline-barstacked-color") || ["#A90329", "#0099c6", "#98AA56", "#da532c", "#4490B1", "#6E9461", "#990099", "#B4CAD3"],
-                        tb.sparkline("html", {
-                        barColor: a,
-                        type: ub,
-                        height: b,
-                        barWidth: c,
-                        barSpacing: d,
-                        stackedBarColor: f,
-                        negBarColor: e,
-                        zeroAxis: "false"
-                    })));
+                    var $el = $(elem);
+                    var type = attrs.type || "bar";
+                    if (type == "bar"){
+                        a = attrs.barColor || $el.css("color") || "#0000f0"; 
+                        b = attrs.height || "26px"; 
+                        c = attrs.barWidth || 5; 
+                        d = attrs.barSpacing || 2; 
+                        e = attrs.negBarColor || "#A90329"; 
+                        f = attrs.stackedBarColor || ["#A90329", "#0099c6", "#98AA56", "#da532c", "#4490B1", "#6E9461", "#990099", "#B4CAD3"];
+                        var options = {
+                            barColor: a,
+                            type: type,
+                            height: b,
+                            barWidth: c,
+                            barSpacing: d,
+                            negBarColor: e,
+                            stackedBarColor: f,
+                            zeroAxis: "false"
+                        }
+                        $el.css("width", "100px");
+                        $el.css("height", "100px");
+                        $el.sparkline(scope[attrs.dataset],options);
+                    }
                 };
                 return render;
             },
