@@ -14,13 +14,13 @@
                 $locationProvider.html5Mode(true);
                 $routeProvider.when('/scaffold/smartadmin/', {
                     templateUrl: '/scaffold/smartadmin/partials/Index',
-                    controller: 'IndexController'
+                    controller: 'IndexCtrl'
                 }).when('/scaffold/smartadmin/graph', {
                     templateUrl: '/scaffold/smartadmin/partials/Graph',
-                    controller: 'GraphController'
+                    controller: 'GraphCtrl'
                 }).otherwise({
                     templateUrl: '/scaffold/smartadmin/partials/NotFound',
-                    controller: 'StaticController'
+                    controller: 'StaticCtrl'
                 });
             }]).run(function () {
             console.log("run");

@@ -9,18 +9,18 @@
 
 
 module Smartadmin.Demo {
-    class IndexController {
+    class IndexCtrl {
     }
-    app.controller("IndexController", IndexController);
+    app.controller("IndexCtrl", IndexCtrl);
 
-    class StaticController {
+    class StaticCtrl {
     }
-    app.controller("StaticController", StaticController);
+    app.controller("StaticCtrl", StaticCtrl);
 
-    class NavController {
+    class NavCtrl {
         basePath = "/scaffold/smartadmin";
         constructor(public $scope, public $location) {
-            $scope.NavController = this;
+            $scope.navCtrl = this;
         }
         getClass(path: string):string {
             if (path == "" && this.$location.path() == this.basePath)
@@ -32,7 +32,7 @@ module Smartadmin.Demo {
             return ""
         }
     }
-    app.controller("NavController", NavController);
+    app.controller("NavCtrl", NavCtrl);
 
     /* chart colors default */
     var $chrt_border_color = "#efefef";
@@ -109,7 +109,7 @@ module Smartadmin.Demo {
 
     }
 
-    class GraphController {
+    class GraphCtrl {
         constructor(public $scope) {
             var updateInterval = 30;
             var generator1 = new RandomDataGenerator(100);
@@ -130,6 +130,6 @@ module Smartadmin.Demo {
             setTimeout(update, updateInterval);
         }
     }
-    app.controller("GraphController", GraphController);
+    app.controller("GraphCtrl", GraphCtrl);
 
 }

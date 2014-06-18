@@ -8,28 +8,28 @@ var Smartadmin;
     * - exposes the model to the template and provides event handlers
     */
     (function (Demo) {
-        var IndexController = (function () {
-            function IndexController() {
+        var IndexCtrl = (function () {
+            function IndexCtrl() {
             }
-            return IndexController;
+            return IndexCtrl;
         })();
-        Demo.app.controller("IndexController", IndexController);
+        Demo.app.controller("IndexCtrl", IndexCtrl);
 
-        var StaticController = (function () {
-            function StaticController() {
+        var StaticCtrl = (function () {
+            function StaticCtrl() {
             }
-            return StaticController;
+            return StaticCtrl;
         })();
-        Demo.app.controller("StaticController", StaticController);
+        Demo.app.controller("StaticCtrl", StaticCtrl);
 
-        var NavController = (function () {
-            function NavController($scope, $location) {
+        var NavCtrl = (function () {
+            function NavCtrl($scope, $location) {
                 this.$scope = $scope;
                 this.$location = $location;
                 this.basePath = "/scaffold/smartadmin";
-                $scope.NavController = this;
+                $scope.navCtrl = this;
             }
-            NavController.prototype.getClass = function (path) {
+            NavCtrl.prototype.getClass = function (path) {
                 if (path == "" && this.$location.path() == this.basePath)
                     return "active";
                 var fullPath = this.basePath + "/" + path;
@@ -38,9 +38,9 @@ var Smartadmin;
                 }
                 return "";
             };
-            return NavController;
+            return NavCtrl;
         })();
-        Demo.app.controller("NavController", NavController);
+        Demo.app.controller("NavCtrl", NavCtrl);
 
         /* chart colors default */
         var $chrt_border_color = "#efefef";
@@ -111,8 +111,8 @@ var Smartadmin;
             return RandomDataGenerator;
         })();
 
-        var GraphController = (function () {
-            function GraphController($scope) {
+        var GraphCtrl = (function () {
+            function GraphCtrl($scope) {
                 this.$scope = $scope;
                 var updateInterval = 30;
                 var generator1 = new RandomDataGenerator(100);
@@ -132,9 +132,9 @@ var Smartadmin;
 
                 setTimeout(update, updateInterval);
             }
-            return GraphController;
+            return GraphCtrl;
         })();
-        Demo.app.controller("GraphController", GraphController);
+        Demo.app.controller("GraphCtrl", GraphCtrl);
     })(Smartadmin.Demo || (Smartadmin.Demo = {}));
     var Demo = Smartadmin.Demo;
 })(Smartadmin || (Smartadmin = {}));
