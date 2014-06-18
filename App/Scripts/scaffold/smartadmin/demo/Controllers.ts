@@ -18,14 +18,14 @@ module Smartadmin.Demo {
     app.controller("StaticController", StaticController);
 
     class NavController {
-        basePath = "/scaffold/smartadmin/";
+        basePath = "/scaffold/smartadmin";
         constructor(public $scope, public $location) {
             $scope.NavController = this;
         }
         getClass(path: string):string {
-            if (path == "" && this.$location.path() == "/scaffold/smartadmin")
+            if (path == "" && this.$location.path() == this.basePath)
                 return "active";
-            var fullPath = this.basePath + path;
+            var fullPath = this.basePath + "/" + path;
             if (this.$location.path() == fullPath) {
               return "active"
             } 
@@ -34,20 +34,58 @@ module Smartadmin.Demo {
     }
     app.controller("NavController", NavController);
 
-    app.controller("GraphController", function ($scope) {
-        var data = [[],[]],
-            totalPoints = 300;
+    /* chart colors default */
+    var $chrt_border_color = "#efefef";
+    var $chrt_grid_color = "#DDD"
+    var $chrt_main = "#E24913";			/* red       */
+    var $chrt_second = "#6595b4";		/* blue      */
+    var $chrt_third = "#FF9F01";		/* orange    */
+    var $chrt_fourth = "#7e9d3a";		/* green     */
+    var $chrt_fifth = "#BD362F";		/* dark red  */
+    var $chrt_mono = "#000";
 
-        function getRandomData(i) {
+    var flotOptions = {
+        series: {
+            lines: {
+                show: true
+            },
+        },
+        grid: {
+            hoverable: true,
+            clickable: true,
+            tickColor: $chrt_border_color,
+            borderWidth: 0,
+            borderColor: $chrt_border_color,
+        },
+        tooltip: true,
+        tooltipOpts: {
+            //content : "Value <b>$x</b> Value <span>$y</span>",
+            defaultTheme: false
+        },
+        colors: [$chrt_second, $chrt_fourth],
+        yaxis: {
+            min: 0,
+            max: 100
+        },
+    };
 
-            if (data[i].length > 0)
-                data[i] = data[i].slice(1);
+    class RandomDataGenerator {
+        data: Array<number> = []
+        constructor(public totalPoints) {
+        }
+
+        generate(): Array<any> {
+
+            var data = this.data;
+
+            if (data.length > 0)
+                this.data = data = data.slice(1);
 
             // Do a random walk
 
-            while (data[i].length < totalPoints) {
+            while (data.length < this.totalPoints) {
 
-                var prev = data[i].length > 0 ? data[i][data[i].length - 1] : 50,
+                var prev = data.length > 0 ? data[data.length - 1] : 50,
                     y = prev + Math.random() * 10 - 5;
 
                 if (y < 0) {
@@ -56,69 +94,42 @@ module Smartadmin.Demo {
                     y = 100;
                 }
 
-                data[i].push(y);
+                data.push(y);
             }
 
             // Zip the generated y values with the x values
 
             var res = [];
-            for (var j = 0; j < data[i].length; ++j) {
-                res.push([j, data[i][j]])
+            for (var i = 0; i < data.length; ++i) {
+                res.push([i, data[i]]);
 			}
 
             return res;
         }
 
-        var updateInterval = 30;
+    }
 
-        $scope.flotData = {};
+    class GraphController {
+        constructor(public $scope) {
+            var updateInterval = 30;
+            var generator1 = new RandomDataGenerator(100);
+            var generator2 = new RandomDataGenerator(100);
 
-        function update() {
+            function update() {
+                $scope.$apply(() => {
+                    $scope.flotData.data = [generator1.generate(), generator2.generate()];
+                });
+                setTimeout(update, updateInterval);
+            }
 
-            $scope.$apply(() => {
-                $scope.flotData.data = [getRandomData(0), getRandomData(1)];
-            });
-
+            $scope.flotData = {
+                data: [generator1.generate(), generator2.generate()],
+                options: flotOptions
+            };
+            
             setTimeout(update, updateInterval);
         }
-
-        /* chart colors default */
-        var $chrt_border_color = "#efefef";
-        var $chrt_grid_color = "#DDD"
-		var $chrt_main = "#E24913";			/* red       */
-        var $chrt_second = "#6595b4";		/* blue      */
-        var $chrt_third = "#FF9F01";		/* orange    */
-        var $chrt_fourth = "#7e9d3a";		/* green     */
-        var $chrt_fifth = "#BD362F";		/* dark red  */
-        var $chrt_mono = "#000";
-
-        $scope.flotData.data = [getRandomData(0), getRandomData(1)];
-        $scope.flotData.options = {
-            series: {
-                lines: {
-                    show: true
-                },
-            },
-            grid: {
-                hoverable: true,
-                clickable: true,
-                tickColor: $chrt_border_color,
-                borderWidth: 0,
-                borderColor: $chrt_border_color,
-            },
-            tooltip: true,
-            tooltipOpts: {
-                //content : "Value <b>$x</b> Value <span>$y</span>",
-                defaultTheme: false
-            },
-            colors: [$chrt_second, $chrt_fourth],
-            yaxis: {
-                min: 0,
-                max: 100
-            },
-        };
-        
-        setTimeout(update, updateInterval);
-    });
+    }
+    app.controller("GraphController", GraphController);
 
 }
