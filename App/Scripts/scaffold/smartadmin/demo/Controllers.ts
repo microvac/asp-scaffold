@@ -9,22 +9,30 @@
 
 
 module Smartadmin.Demo {
-    app.controller("IndexController", function ($scope) {
-    });
-    app.controller("StaticController", function ($scope) {
-    });
-    app.controller("NavController", function ($scope, $location) {
-        var basePath = "/scaffold/smartadmin/";
-        $scope.getClass = function (path: string):string {
-            if (path == "" && $location.path() == "/scaffold/smartadmin")
+    class IndexController {
+    }
+    app.controller("IndexController", IndexController);
+
+    class StaticController {
+    }
+    app.controller("StaticController", StaticController);
+
+    class NavController {
+        basePath = "/scaffold/smartadmin/";
+        constructor(public $scope, public $location) {
+            $scope.NavController = this;
+        }
+        getClass(path: string):string {
+            if (path == "" && this.$location.path() == "/scaffold/smartadmin")
                 return "active";
-            var fullPath = basePath + path;
-            if ($location.path() == fullPath) {
+            var fullPath = this.basePath + path;
+            if (this.$location.path() == fullPath) {
               return "active"
             } 
             return ""
         }
-    });
+    }
+    app.controller("NavController", NavController);
 
     app.controller("GraphController", function ($scope) {
         var data = [[],[]],

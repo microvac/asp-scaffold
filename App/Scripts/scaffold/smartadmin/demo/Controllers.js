@@ -8,22 +8,39 @@ var Smartadmin;
     * - exposes the model to the template and provides event handlers
     */
     (function (Demo) {
-        Demo.app.controller("IndexController", function ($scope) {
-        });
-        Demo.app.controller("StaticController", function ($scope) {
-        });
-        Demo.app.controller("NavController", function ($scope, $location) {
-            var basePath = "/scaffold/smartadmin/";
-            $scope.getClass = function (path) {
-                if (path == "" && $location.path() == "/scaffold/smartadmin")
+        var IndexController = (function () {
+            function IndexController() {
+            }
+            return IndexController;
+        })();
+        Demo.app.controller("IndexController", IndexController);
+
+        var StaticController = (function () {
+            function StaticController() {
+            }
+            return StaticController;
+        })();
+        Demo.app.controller("StaticController", StaticController);
+
+        var NavController = (function () {
+            function NavController($scope, $location) {
+                this.$scope = $scope;
+                this.$location = $location;
+                this.basePath = "/scaffold/smartadmin/";
+                $scope.NavController = this;
+            }
+            NavController.prototype.getClass = function (path) {
+                if (path == "" && this.$location.path() == "/scaffold/smartadmin")
                     return "active";
-                var fullPath = basePath + path;
-                if ($location.path() == fullPath) {
+                var fullPath = this.basePath + path;
+                if (this.$location.path() == fullPath) {
                     return "active";
                 }
                 return "";
             };
-        });
+            return NavController;
+        })();
+        Demo.app.controller("NavController", NavController);
 
         Demo.app.controller("GraphController", function ($scope) {
             var data = [[], []], totalPoints = 300;
