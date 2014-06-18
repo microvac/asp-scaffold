@@ -203,7 +203,6 @@
     <Content Include="Content\app\imports.css">
       <DependentUpon>imports.less</DependentUpon>
     </Content>
-    <Content Include="Content\Site.css" />
     <Content Include="packages.config" />
     <Content Include="Scripts\Models.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
