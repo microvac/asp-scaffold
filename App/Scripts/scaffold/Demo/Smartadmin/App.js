@@ -1,7 +1,7 @@
 ﻿var Scaffold;
 (function (Scaffold) {
     (function (Demo) {
-        /// <reference path="../../../typings/angularjs/angular.d.ts"/>
+        /// <reference path="../../../../../Scaffold/Scripts/typings/angularjs/angular.d.ts"/>
         (function (Smartadmin) {
             Smartadmin.app = angular.module('app', [
                 'ngRoute',

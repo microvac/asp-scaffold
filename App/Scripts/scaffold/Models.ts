@@ -1,7 +1,7 @@
 ﻿// WARNING: T4 generated file  (it is related to CodeToServerProxy)
 //
 
-/// <reference path="../typings/jquery/jquery.d.ts"/>
+/// <reference path="../../../Scaffold/Scripts/typings/jquery/jquery.d.ts"/>
 
 module Scaffold {
     export class AjaxSettings {

@@ -23,16 +23,16 @@ namespace App.Configs
             // Script Bundles
 
             bundles.Add(new ScriptBundle("~/js/libraries")
-                .Include("~/Scripts/jquery-{version}.js")
-                .Include("~/Scripts/bootstrap.js")
-                .Include("~/Scripts/angular.js")
-                .Include("~/Scripts/angular-route.js"));
+                .Include("~/Scaffold/Scripts/jquery-{version}.js")
+                .Include("~/Scaffold/Scripts/bootstrap.js")
+                .Include("~/Scaffold/Scripts/angular.js")
+                .Include("~/Scaffold/Scripts/angular-route.js"));
 
             bundles.Add(new ScriptBundle("~/js/scaffold")
                 .Include("~/Scripts/Scaffold/Scaffold.js"));
 
             bundles.Add(new ScriptBundle("~/js/scaffold/flot")
-                .Include("~/Scripts/flot/jquery.flot.js")
+                .Include("~/Scaffold/Scripts/flot/jquery.flot.js")
                 .Include("~/Scripts/Scaffold/Directives/flot.js"));
 
             bundles.Add(new ScriptBundle("~/js/scaffold/sparkline")

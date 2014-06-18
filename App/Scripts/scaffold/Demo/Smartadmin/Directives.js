@@ -1,4 +1,4 @@
-﻿/// <reference path="../../../typings/angularjs/angular.d.ts"/>
+﻿/// <reference path="../../../../../Scaffold/Scripts/typings/angularjs/angular.d.ts"/>
 /// <reference path="App.ts"/>
 var Scaffold;
 (function (Scaffold) {
