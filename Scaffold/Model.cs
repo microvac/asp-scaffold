@@ -8,6 +8,6 @@ namespace Scaffold
 {
     public class Model
     {
-        public long ID { get; set; }
+        public virtual String ID { get; set; }
     }
 }

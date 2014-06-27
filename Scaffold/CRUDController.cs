@@ -13,14 +13,14 @@ namespace Scaffold
     {
         public CRUDController(DbContext dbContext): base(dbContext) { }
 
-        public void Delete(long id)
+        public void Delete(String id)
         {
             var model = new TModel { ID = id };
             dbContext.Entry(model).State = EntityState.Deleted;
             dbContext.SaveChanges();
         }
 
-        public long Post([FromBody] TModel model)
+        public String Post([FromBody] TModel model)
         {
             dbSet.Add(model);
             dbContext.SaveChanges();

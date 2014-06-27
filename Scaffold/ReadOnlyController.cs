@@ -17,7 +17,7 @@ namespace Scaffold
             return dbSet;
         }
 
-        public TModel Get(long id)
+        public TModel Get(String id)
         {
             return dbSet.FirstOrDefault(m => m.ID == id);
         }
