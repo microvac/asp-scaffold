@@ -8,19 +8,19 @@ using System.Web.Http;
 
 namespace Scaffold
 {
-    public class CRUDController<TModel>: ReadOnlyController<TModel>
-        where TModel: Model, new()
+    public class CRUDController<TModel, TId>: ReadOnlyController<TModel, TId>
+        where TModel: Model<TId>, new()
     {
         public CRUDController(DbContext dbContext): base(dbContext) { }
 
-        public void Delete(String id)
+        public void Delete(TId id)
         {
             var model = new TModel { ID = id };
             dbContext.Entry(model).State = EntityState.Deleted;
             dbContext.SaveChanges();
         }
 
-        public String Post([FromBody] TModel model)
+        public TId Post([FromBody] TModel model)
         {
             dbSet.Add(model);
             dbContext.SaveChanges();
