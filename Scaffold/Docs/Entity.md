@@ -9,7 +9,7 @@ This scaffold prefers Code First development, no edmx
 For CRUD models, the development until typescript should be as simple as possible, suppose we want to create CAR model
 
 1. First we create, `Car.cs` which extends `Model`, which have long primary key, we add `Name` and `Speed` properties
-```cs
+```csharp
     public class Car: Model<long>
     {
         public String Name { get; set; }
