@@ -9,7 +9,6 @@ This scaffold prefers Code First development, no edmx
 For CRUD models, the development until typescript should be as simple as possible, suppose we want to create CAR model
 
 1. First we create, `Car.cs` which extends `Model`, which have long primary key, we add `Name` and `Speed` properties
-
 ```cs
     public class Car: Model<long>
     {
@@ -18,7 +17,6 @@ For CRUD models, the development until typescript should be as simple as possibl
     }
 ```
 2. Add that class to a DBSet in the DBContext, suppose you name `DB` as the DB Context 
-
 ```cs
     public class DB : DbContext 
     {
@@ -32,7 +30,6 @@ For CRUD models, the development until typescript should be as simple as possibl
 3. Generate migration script, and generate table in the database. type `Update-Database` in Package Manager Console
 
 4. Create the CRUD API controller
-
 ```cs
 public class CarController : CRUDController<Car, long>
 {
