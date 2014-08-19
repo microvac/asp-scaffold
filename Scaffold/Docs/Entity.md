@@ -1,4 +1,4 @@
-﻿# Entity Development Flow
+# Entity Development Flow
 
 ## Code First
 
@@ -9,7 +9,8 @@ This scaffold prefers Code First development, no edmx
 For CRUD models, the development until typescript should be as simple as possible, suppose we want to create CAR model
 
 1. First we create, `Car.cs` which extends `Model`, which have long primary key, we add `Name` and `Speed` properties
-```csharp
+
+```cs
     public class Car: Model<long>
     {
         public String Name { get; set; }
@@ -17,6 +18,7 @@ For CRUD models, the development until typescript should be as simple as possibl
     }
 ```
 2. Add that class to a DBSet in the DBContext, suppose you name `DB` as the DB Context 
+
 ```cs
     public class DB : DbContext 
     {
@@ -30,12 +32,14 @@ For CRUD models, the development until typescript should be as simple as possibl
 3. Generate migration script, and generate table in the database. type `Update-Database` in Package Manager Console
 
 4. Create the CRUD API controller
+
 ```cs
 public class CarController : CRUDController<Car, long>
 {
     public CarController(DB dbContext): base(dbContext) {}
 }
 ```
+
 Now you will have a API controller with:
 - `GetAll()`, to get all cars
 - `Get(id)`, to get one car with that id
