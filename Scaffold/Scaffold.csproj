@@ -156,6 +156,7 @@
     <None Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Docs\Entity.md" />
     <None Include="packages.config" />
     <None Include="Scripts\angular-animate.min.js.map" />
     <None Include="Scripts\angular-cookies.min.js.map" />
@@ -168,6 +169,9 @@
     <None Include="Scripts\errors.json" />
     <None Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Scripts\version.json" />
+    <Content Include="Content\bootstrap\variables.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
     <Content Include="Content\smartadmin\smartadmin-production.css" />
     <Content Include="Content\smartadmin\smartadmin-skins.css" />
     <Content Include="Scripts\Scaffold\Directives\flot.js" />
