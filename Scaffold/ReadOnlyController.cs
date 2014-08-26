@@ -13,9 +13,20 @@ namespace Scaffold
     {
         public ReadOnlyController(DbContext dbContext): base(dbContext) { }
 
+        private List<Expression<Func<TModel, Object>>> singleIncludes = 
+            new List<Expression<Func<TModel,object>>>();
+
+        private List<Expression<Func<TModel, Object>>> listIncludes = 
+            new List<Expression<Func<TModel,object>>>();
+
         public IEnumerable<TModel> GetAll()
         {
-            return dbSet;
+            IQueryable<TModel> exp = dbSet;
+            foreach (var include in listIncludes)
+            {
+                exp = exp.Include(include);
+            }
+            return exp;
         }
 
         public TModel Get(TId id)
@@ -32,7 +43,24 @@ namespace Scaffold
                     ),
                 new[] { itemParameter }
                 );
-            return dbSet.Where(whereExpression).Single();
+            var exp = dbSet.Where(whereExpression);
+            foreach (var include in singleIncludes)
+            {
+                exp = exp.Include(include);
+            }
+            return exp.Single();
+        }
+
+        protected ReadOnlyController<TModel, TId> SingleInclude(Expression<Func<TModel, Object>> include)
+        {
+            singleIncludes.Add(include);
+            return this;
+        }
+
+        protected ReadOnlyController<TModel, TId> ListInclude(Expression<Func<TModel, Object>> include)
+        {
+            listIncludes.Add(include);
+            return this;
         }
 
     }
