@@ -63,22 +63,22 @@ namespace Scaffold
             return exp.Single();
         }
 
-        protected ReadOnlyController<TModel, TId, TQuery> SingleInclude(Expression<Func<TModel, Object>> include)
+        protected void SingleInclude(params Expression<Func<TModel, Object>>[] includes)
         {
-            singleIncludes.Add(include);
-            return this;
+            foreach(var include in includes)
+                singleIncludes.Add(include);
         }
 
-        protected ReadOnlyController<TModel, TId, TQuery> ListInclude(Expression<Func<TModel, Object>> include)
+        protected void ListInclude(params Expression<Func<TModel, Object>>[] includes)
         {
-            listIncludes.Add(include);
-            return this;
+            foreach(var include in includes)
+                listIncludes.Add(include);
         }
-        protected ReadOnlyController<TModel, TId, TQuery> Include(Expression<Func<TModel, Object>> include)
+        protected void Include(Expression<Func<TModel, Object>>[] includes)
         {
-            singleIncludes.Add(include);
-            listIncludes.Add(include);
-            return this;
+            foreach (var include in includes) { 
+                listIncludes.Add(include);
+            }
         }
 
     }
