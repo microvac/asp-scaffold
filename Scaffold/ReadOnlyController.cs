@@ -77,6 +77,7 @@ namespace Scaffold
         protected void Include(Expression<Func<TModel, Object>>[] includes)
         {
             foreach (var include in includes) { 
+                singleIncludes.Add(include);
                 listIncludes.Add(include);
             }
         }
