@@ -74,6 +74,12 @@ namespace Scaffold
             listIncludes.Add(include);
             return this;
         }
+        protected ReadOnlyController<TModel, TId, TQuery> Include(Expression<Func<TModel, Object>> include)
+        {
+            singleIncludes.Add(include);
+            listIncludes.Add(include);
+            return this;
+        }
 
     }
 
