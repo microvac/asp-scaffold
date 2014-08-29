@@ -14,7 +14,7 @@ namespace Scaffold
         public String SortField { get; set; }
         public String SortOrder { get; set; }
 
-        public IQueryable<TModel> Sort(IQueryable<TModel> query)
+        public virtual IQueryable<TModel> Sort(IQueryable<TModel> query)
         {
             if (string.IsNullOrWhiteSpace(SortField))
                 SortField = "ID";
@@ -23,7 +23,7 @@ namespace Scaffold
             return query.OrderBy(SortField.Trim()+" "+SortOrder.Trim());
         }
 
-        public IQueryable<TModel> Page(IQueryable<TModel> query)
+        public virtual IQueryable<TModel> Page(IQueryable<TModel> query)
         {
             if (PageBegin.HasValue && PageBegin > 0)
                 query = query.Skip(PageBegin.Value);
