@@ -32,7 +32,7 @@ namespace Scaffold
             return query;
         }
 
-        public IQueryable<TModel> Filter(IQueryable<TModel> query)
+        public virtual IQueryable<TModel> Filter(IQueryable<TModel> query)
         {
             return query;
         }
