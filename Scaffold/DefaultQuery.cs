@@ -20,7 +20,7 @@ namespace Scaffold
                 SortField = "ID";
             if (SortOrder != "ASC" || SortOrder != "DESC")
                 SortOrder = "ASC";
-            return query.OrderBy(SortField.Trim()+" "+SortOrder.Trim());
+            return query.OrderBy(SortField.Trim()+" "+ SortOrder.Trim());
         }
 
         public virtual IQueryable<TModel> Page(IQueryable<TModel> query)
