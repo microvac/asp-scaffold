@@ -26,7 +26,7 @@ namespace Scaffold
         public virtual IQueryable<TModel> Page(IQueryable<TModel> query)
         {
             if (PageBegin.HasValue && PageBegin > 0)
-                query = query.Skip(PageBegin.Value);
+                query = query.Skip((PageBegin.Value - 1) * PageLength.Value);
             if (PageLength.HasValue && PageLength > 0)
                 query = query.Take(PageLength.Value);
             return query;
