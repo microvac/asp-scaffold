@@ -23,14 +23,21 @@ namespace Scaffold
 
         public IEnumerable<TModel> GetAll([FromUri] TQuery query)
         {
-            IQueryable<TModel> exp = dbSet;
-            foreach (var include in listIncludes)
+            try
             {
-                exp = exp.Include(include);
+                IQueryable<TModel> exp = dbSet;
+                foreach (var include in listIncludes)
+                {
+                    exp = exp.Include(include);
+                }
+                if (query != null)
+                    exp = query.Page(query.Sort(query.Filter(exp)));
+                return exp;
             }
-            if (query != null)
-                exp = query.Page(query.Sort(query.Filter(exp)));
-            return exp;
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public long GetCount([FromUri] IQuery<TModel> query)
@@ -43,24 +50,33 @@ namespace Scaffold
 
         public TModel Get(TId id)
         {
-            var itemParameter = Expression.Parameter(typeof(TModel), "item");
-            var whereExpression = Expression.Lambda<Func<TModel, bool>>
-                (
-                Expression.Equal(
-                    Expression.Property(
-                        itemParameter,
-                        "ID"
-                        ),
-                    Expression.Constant(id)
-                    ),
-                new[] { itemParameter }
-                );
-            var exp = dbSet.Where(whereExpression);
-            foreach (var include in singleIncludes)
+            try
             {
-                exp = exp.Include(include);
+                var itemParameter = Expression.Parameter(typeof(TModel), "item");
+                var whereExpression = Expression.Lambda<Func<TModel, bool>>
+                    (
+                    Expression.Equal(
+                        Expression.Property(
+                            itemParameter,
+                            "ID"
+                            ),
+                        Expression.Constant(id)
+                        ),
+                    new[] { itemParameter }
+                    );
+                var exp = dbSet.Where(whereExpression);
+                foreach (var include in singleIncludes)
+                {
+                    exp = exp.Include(include);
+                }
+
+                return exp.Single();
             }
-            return exp.Single();
+
+            catch(Exception ex){
+                 return null;
+            }
+            
         }
 
         protected void SingleInclude(params Expression<Func<TModel, Object>>[] includes)
