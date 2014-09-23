@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Scaffold.Exceptions
 {
-    public class NotFoundException: Exception
+    public class NotFound: Exception
     {
     }
 }
