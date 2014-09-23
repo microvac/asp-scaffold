@@ -33,7 +33,7 @@ namespace Scaffold
             return exp;
         }
 
-        public long GetCount([FromUri] IQuery<TModel> query)
+        public long GetCount([FromUri] TQuery query)
         {
             IQueryable<TModel> exp = dbSet;
             if (query != null)
