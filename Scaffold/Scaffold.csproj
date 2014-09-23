@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="CRUDController.cs" />
     <Compile Include="DTEUtils.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
     <Compile Include="IQuery.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="ModelController.cs" />
