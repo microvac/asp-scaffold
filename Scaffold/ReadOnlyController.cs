@@ -60,6 +60,7 @@ namespace Scaffold
             {
                 exp = exp.Include(include);
             }
+
             var result = exp.Single();
             return result;
         }
