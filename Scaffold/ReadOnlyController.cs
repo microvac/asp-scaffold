@@ -61,8 +61,9 @@ namespace Scaffold
                 exp = exp.Include(include);
             }
 
-            return exp.Single();
-            
+            var result = exp.Single();
+            return result;
+
         }
 
         protected void SingleInclude(params Expression<Func<TModel, Object>>[] includes)
