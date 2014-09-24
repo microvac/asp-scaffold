@@ -179,6 +179,7 @@
     </Content>
     <Content Include="Content\smartadmin\smartadmin-production.css" />
     <Content Include="Content\smartadmin\smartadmin-skins.css" />
+    <Content Include="Scripts\flot\jquery.flot.axislabels.js" />
     <Content Include="Scripts\Scaffold\Directives\flot.js" />
     <Content Include="Scripts\Scaffold\Directives\sparkline.js" />
     <Content Include="Scripts\Scaffold\Lib\jquery.sparkline.js" />
