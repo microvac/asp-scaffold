@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -14,25 +16,34 @@ namespace Scaffold
     {
         public CRUDController(DbContext dbContext): base(dbContext) { }
 
-        public void Delete(TId id)
+        public virtual HttpResponseMessage Delete(TId id)
         {
             var model = new TModel { ID = id };
             dbContext.Entry(model).State = EntityState.Deleted;
             dbContext.SaveChanges();
+            return new HttpResponseMessage();
         }
 
-        public TId Post([FromBody] TModel model)
+        public virtual HttpResponseMessage Post([FromBody] TModel model)
         {
+            PrePersist(model);
             dbSet.Add(model);
             dbContext.SaveChanges();
-            return model.ID;
+            PostPersist(model);
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, model.ID);
         }
 
-        public void Put([FromBody] TModel model)
+        public virtual HttpResponseMessage Put([FromBody] TModel model)
         {
+            PrePersist(model);
             dbContext.Entry(model).State = EntityState.Modified;
             dbContext.SaveChanges();
+            PostPersist(model);
+            return ControllerContext.Request.CreateResponse(HttpStatusCode.OK, model.ID);
         }
+
+        protected virtual void PrePersist(TModel model) { }
+        protected virtual void PostPersist(TModel model) { }
     }
 
     public class CRUDController<TModel, TId >: CRUDController<TModel, TId, DefaultQuery<TModel>>
