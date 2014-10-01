@@ -9,7 +9,7 @@ using System.Web.Http;
 namespace Scaffold
 {
     public class ModelController<TModel, TId>: ApiController
-        where TModel: Model<TId>, new()
+        where TModel: class, IModel<TId>, new()
     {
         protected DbContext dbContext;
         protected DbSet<TModel> dbSet;

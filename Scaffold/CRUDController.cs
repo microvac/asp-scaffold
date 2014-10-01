@@ -11,7 +11,7 @@ using System.Web.Http;
 namespace Scaffold
 {
     public class CRUDController<TModel, TId, TQuery>: ReadOnlyController<TModel, TId, TQuery>
-        where TModel: Model<TId>, new()
+        where TModel: class, IModel<TId>, new()
         where TQuery: IQuery<TModel>, new()
     {
         public CRUDController(DbContext dbContext): base(dbContext) { }
@@ -47,7 +47,7 @@ namespace Scaffold
     }
 
     public class CRUDController<TModel, TId >: CRUDController<TModel, TId, DefaultQuery<TModel>>
-        where TModel: Model<TId>, new()
+        where TModel: class, IModel<TId>, new()
     {
         public CRUDController(DbContext dbContext): base(dbContext) { }
     }

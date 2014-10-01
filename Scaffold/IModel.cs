@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Scaffold
 {
-    public class Model<TId>
+    public interface IModel<TId>
     {
-        public virtual TId ID { get; set; }
+        TId ID { get; set; }
     }
 }

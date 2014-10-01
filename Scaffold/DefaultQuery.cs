@@ -13,11 +13,14 @@ namespace Scaffold
         public int? PageLength { get; set; }
         public String SortField { get; set; }
         public String SortOrder { get; set; }
+        public String IDField { get; set; }
+
+        public DefaultQuery() { IDField = "ID"; }
 
         public virtual IQueryable<TModel> Sort(IQueryable<TModel> query)
         {
             if (string.IsNullOrWhiteSpace(SortField))
-                SortField = "ID";
+                SortField = IDField;
             if (SortOrder != "ASC" || SortOrder != "DESC")
                 SortOrder = "ASC";
             return query.OrderBy(SortField.Trim()+" "+ SortOrder.Trim());
