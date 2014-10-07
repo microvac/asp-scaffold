@@ -61,8 +61,16 @@ namespace Scaffold
                 exp = exp.Include(include);
             }
 
-            var result = exp.Single();
-            return result;
+            try
+            {
+                var result = exp.Single();
+                return result;
+            }
+            catch(InvalidOperationException ioe)
+            {
+                // no element in sequence throws InvalidOperationException
+                return null;
+            }
 
         }
 
