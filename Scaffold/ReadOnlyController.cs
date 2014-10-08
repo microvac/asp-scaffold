@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Linq.Dynamic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -10,21 +11,23 @@ using System.Web.Http;
 namespace Scaffold
 {
     public class ReadOnlyController<TModel, TId, TQuery>: ModelController<TModel, TId>
-        where TModel: Model<TId>, new() 
+        where TModel: class, IModel<TId>, new() 
         where TQuery: IQuery<TModel>, new()
     {
-        public ReadOnlyController(DbContext dbContext): base(dbContext) { }
+        public ReadOnlyController(DbContext dbContext) : base(dbContext) { IDField = "ID"; }
 
-        private List<Expression<Func<TModel, Object>>> singleIncludes = 
+        public string IDField { get; set; }
+
+        private List<Expression<Func<TModel, Object>>> SingleIncludes = 
             new List<Expression<Func<TModel,object>>>();
 
-        private List<Expression<Func<TModel, Object>>> listIncludes = 
+        private List<Expression<Func<TModel, Object>>> ListIncludes = 
             new List<Expression<Func<TModel,object>>>();
 
-        public IEnumerable<TModel> GetAll([FromUri] TQuery query)
+        public virtual IEnumerable<TModel> GetAll([FromUri] TQuery query)
         {
             IQueryable<TModel> exp = dbSet;
-            foreach (var include in listIncludes)
+            foreach (var include in ListIncludes)
             {
                 exp = exp.Include(include);
             }
@@ -33,70 +36,54 @@ namespace Scaffold
             return exp;
         }
 
-        public long GetCount([FromUri] IQuery<TModel> query)
+        public virtual long GetCount([FromUri] TQuery query)
         {
             IQueryable<TModel> exp = dbSet;
             if (query != null)
                 exp = query.Sort(exp);
-            return exp.LongCount();
+            var result = exp.LongCount();
+            return result;
         }
 
-        public TModel Get(TId id)
+        public virtual TModel Get(TId id)
         {
-            var itemParameter = Expression.Parameter(typeof(TModel), "item");
-            var whereExpression = Expression.Lambda<Func<TModel, bool>>
-                (
-                Expression.Equal(
-                    Expression.Property(
-                        itemParameter,
-                        "ID"
-                        ),
-                    Expression.Constant(id)
-                    ),
-                new[] { itemParameter }
-                );
-            var exp = dbSet.Where(whereExpression);
-            foreach (var include in singleIncludes)
+            IQueryable<TModel> exp = null;
+            if(typeof(TId) == typeof(String))
+                exp = dbSet.Where(IDField + "=\"" + id+"\"");
+            else
+                exp = dbSet.Where(IDField + "=" + id);
+            foreach (var include in SingleIncludes)
             {
                 exp = exp.Include(include);
             }
 
-            try
-            {
-                var result = exp.Single();
-                return result;
-            }
-            catch(InvalidOperationException ioe)
-            {
-                // no element in sequence throws InvalidOperationException
-                return null;
-            }
-
+            var result = exp.SingleOrDefault();
+            return result;
         }
 
         protected void SingleInclude(params Expression<Func<TModel, Object>>[] includes)
         {
             foreach(var include in includes)
-                singleIncludes.Add(include);
+                SingleIncludes.Add(include);
         }
 
         protected void ListInclude(params Expression<Func<TModel, Object>>[] includes)
         {
             foreach(var include in includes)
-                listIncludes.Add(include);
+                ListIncludes.Add(include);
         }
         protected void Include(params Expression<Func<TModel, Object>>[] includes)
         {
             foreach (var include in includes) { 
-                singleIncludes.Add(include);
-                listIncludes.Add(include);
+                SingleIncludes.Add(include);
+                ListIncludes.Add(include);
             }
         }
 
     }
 
     public class ReadOnlyController<TModel, TId>: ReadOnlyController<TModel, TId, DefaultQuery<TModel>>
-        where TModel: Model<TId>, new() 
+        where TModel: class, IModel<TId>, new() 
     {
         public ReadOnlyController(DbContext dbContext): base(dbContext) { }
     }
