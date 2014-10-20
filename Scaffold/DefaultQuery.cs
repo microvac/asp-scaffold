@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,13 +16,15 @@ namespace Scaffold
         public String SortOrder { get; set; }
         public String IDField { get; set; }
 
+        private Expression<Func<TModel, bool>> FilterExpression;
+
         public DefaultQuery() { IDField = "ID"; }
 
         public virtual IQueryable<TModel> Sort(IQueryable<TModel> query)
         {
             if (string.IsNullOrWhiteSpace(SortField))
                 SortField = IDField;
-            if (SortOrder != "ASC" || SortOrder != "DESC")
+            if (SortOrder != "ASC" && SortOrder != "DESC")
                 SortOrder = "ASC";
             return query.OrderBy(SortField.Trim()+" "+ SortOrder.Trim());
         }
@@ -37,7 +40,22 @@ namespace Scaffold
 
         public virtual IQueryable<TModel> Filter(IQueryable<TModel> query)
         {
-            return query;
+            if (FilterExpression != null)
+                return query.Where(FilterExpression);
+            else
+                return query;
         }
+
+        public virtual void SetFilter(Expression<Func<TModel, bool>> predicate)
+        {
+            FilterExpression = predicate;
+        }
+
+        public virtual Expression<Func<TModel, bool>> GetFilter()
+        {
+            return FilterExpression;
+        }
+
+
     }
 }

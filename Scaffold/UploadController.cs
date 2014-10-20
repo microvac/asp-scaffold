@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http;
@@ -31,8 +30,8 @@ namespace Scaffold
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.UnsupportedMediaType));
             
             string root = HttpContext.Current.Server.MapPath("~/Content/uploads/" + UploadFolder); 
-            var provider = new GuidMultipartFormDataStreamProvider(root); 
-            
+            var provider = new GuidMultipartFormDataStreamProvider(root);             
+
             var task = Request.Content.ReadAsMultipartAsync(provider).ContinueWith<IEnumerable<FileDesc>>(t => {                
                 if (t.IsFaulted || t.IsCanceled)
                 {
@@ -55,7 +54,7 @@ namespace Scaffold
             return task;
         }
 
-        public virtual void BeforeResponse(IEnumerable<FileDesc> fileDescs) { }
+        protected virtual void BeforeResponse(IEnumerable<FileDesc> fileDescs) { }
     }
 
     public class FileDesc

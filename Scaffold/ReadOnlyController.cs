@@ -18,10 +18,10 @@ namespace Scaffold
 
         public string IDField { get; set; }
 
-        private List<Expression<Func<TModel, Object>>> SingleIncludes = 
+        protected List<Expression<Func<TModel, Object>>> SingleIncludes = 
             new List<Expression<Func<TModel,object>>>();
 
-        private List<Expression<Func<TModel, Object>>> ListIncludes = 
+        protected List<Expression<Func<TModel, Object>>> ListIncludes = 
             new List<Expression<Func<TModel,object>>>();
 
         public virtual IEnumerable<TModel> GetAll([FromUri] TQuery query)
@@ -40,7 +40,7 @@ namespace Scaffold
         {
             IQueryable<TModel> exp = dbSet;
             if (query != null)
-                exp = query.Sort(exp);
+                exp = query.Filter(exp);
             var result = exp.LongCount();
             return result;
         }
