@@ -16,7 +16,7 @@ namespace Scaffold
         public String SortOrder { get; set; }
         public String IDField { get; set; }
 
-        private Expression<Func<TModel, bool>> FilterExpression;
+        protected Expression<Func<TModel, bool>> FilterExpression;
 
         public DefaultQuery() { IDField = "ID"; }
 

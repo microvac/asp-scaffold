@@ -964,6 +964,8 @@
     <Content Include="Scripts\Scaffold\Directives\flot.js" />
     <Content Include="Scripts\Scaffold\Directives\sparkline.js" />
     <Content Include="Scripts\Scaffold\Lib\jquery.sparkline.js" />
+    <Content Include="Scripts\Scaffold\Smartadmin\app.config.js" />
+    <Content Include="Scripts\Scaffold\Smartadmin\app.min.js" />
     <Content Include="Scripts\Scaffold\Smartadmin\Bootstrap.js" />
     <Content Include="Views\Smartadmin\_Layout.cshtml" />
     <Content Include="Views\Smartadmin\Index.cshtml" />
