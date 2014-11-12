@@ -40,12 +40,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -194,6 +192,156 @@
     <None Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <None Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="Content\smartadmin\3.2\.csscomb.json" />
+    <None Include="Content\smartadmin\3.2\.csslintrc" />
+    <None Include="Content\smartadmin\3.2\alerts.less" />
+    <None Include="Content\smartadmin\3.2\badges.less" />
+    <None Include="Content\smartadmin\3.2\bootstrap.less" />
+    <None Include="Content\smartadmin\3.2\breadcrumbs.less" />
+    <None Include="Content\smartadmin\3.2\button-groups.less" />
+    <None Include="Content\smartadmin\3.2\buttons.less" />
+    <None Include="Content\smartadmin\3.2\carousel.less" />
+    <None Include="Content\smartadmin\3.2\close.less" />
+    <None Include="Content\smartadmin\3.2\code.less" />
+    <None Include="Content\smartadmin\3.2\component-animations.less" />
+    <None Include="Content\smartadmin\3.2\dropdowns.less" />
+    <None Include="Content\smartadmin\3.2\forms.less" />
+    <None Include="Content\smartadmin\3.2\glyphicons.less" />
+    <None Include="Content\smartadmin\3.2\grid.less" />
+    <None Include="Content\smartadmin\3.2\input-groups.less" />
+    <None Include="Content\smartadmin\3.2\jumbotron.less" />
+    <None Include="Content\smartadmin\3.2\labels.less" />
+    <None Include="Content\smartadmin\3.2\list-group.less" />
+    <None Include="Content\smartadmin\3.2\media.less" />
+    <None Include="Content\smartadmin\3.2\mixins.less" />
+    <None Include="Content\smartadmin\3.2\mixins\alerts.less" />
+    <None Include="Content\smartadmin\3.2\mixins\background-variant.less" />
+    <None Include="Content\smartadmin\3.2\mixins\border-radius.less" />
+    <None Include="Content\smartadmin\3.2\mixins\buttons.less" />
+    <None Include="Content\smartadmin\3.2\mixins\center-block.less" />
+    <None Include="Content\smartadmin\3.2\mixins\clearfix.less" />
+    <None Include="Content\smartadmin\3.2\mixins\forms.less" />
+    <None Include="Content\smartadmin\3.2\mixins\gradients.less" />
+    <None Include="Content\smartadmin\3.2\mixins\grid-framework.less" />
+    <None Include="Content\smartadmin\3.2\mixins\grid.less" />
+    <None Include="Content\smartadmin\3.2\mixins\hide-text.less" />
+    <None Include="Content\smartadmin\3.2\mixins\image.less" />
+    <None Include="Content\smartadmin\3.2\mixins\labels.less" />
+    <None Include="Content\smartadmin\3.2\mixins\list-group.less" />
+    <None Include="Content\smartadmin\3.2\mixins\nav-divider.less" />
+    <None Include="Content\smartadmin\3.2\mixins\nav-vertical-align.less" />
+    <None Include="Content\smartadmin\3.2\mixins\opacity.less" />
+    <None Include="Content\smartadmin\3.2\mixins\pagination.less" />
+    <None Include="Content\smartadmin\3.2\mixins\panels.less" />
+    <None Include="Content\smartadmin\3.2\mixins\progress-bar.less" />
+    <None Include="Content\smartadmin\3.2\mixins\reset-filter.less" />
+    <None Include="Content\smartadmin\3.2\mixins\resize.less" />
+    <None Include="Content\smartadmin\3.2\mixins\responsive-visibility.less" />
+    <None Include="Content\smartadmin\3.2\mixins\size.less" />
+    <None Include="Content\smartadmin\3.2\mixins\tab-focus.less" />
+    <None Include="Content\smartadmin\3.2\mixins\table-row.less" />
+    <None Include="Content\smartadmin\3.2\mixins\text-emphasis.less" />
+    <None Include="Content\smartadmin\3.2\mixins\text-overflow.less" />
+    <None Include="Content\smartadmin\3.2\mixins\vendor-prefixes.less" />
+    <None Include="Content\smartadmin\3.2\modals.less" />
+    <None Include="Content\smartadmin\3.2\navbar.less" />
+    <None Include="Content\smartadmin\3.2\navs.less" />
+    <None Include="Content\smartadmin\3.2\normalize.less" />
+    <None Include="Content\smartadmin\3.2\pager.less" />
+    <None Include="Content\smartadmin\3.2\pagination.less" />
+    <None Include="Content\smartadmin\3.2\panels.less" />
+    <None Include="Content\smartadmin\3.2\popovers.less" />
+    <None Include="Content\smartadmin\3.2\print.less" />
+    <None Include="Content\smartadmin\3.2\progress-bars.less" />
+    <None Include="Content\smartadmin\3.2\responsive-embed.less" />
+    <None Include="Content\smartadmin\3.2\responsive-utilities.less" />
+    <None Include="Content\smartadmin\3.2\scaffolding.less" />
+    <None Include="Content\smartadmin\3.2\tables.less" />
+    <None Include="Content\smartadmin\3.2\theme.less" />
+    <None Include="Content\smartadmin\3.2\thumbnails.less" />
+    <None Include="Content\smartadmin\3.2\tooltip.less" />
+    <None Include="Content\smartadmin\3.2\type.less" />
+    <None Include="Content\smartadmin\3.2\utilities.less" />
+    <None Include="Content\smartadmin\3.2\variables.less" />
+    <None Include="Content\smartadmin\3.2\wells.less" />
+    <None Include="Content\smartadmin\bootstrap.less" />
+    <None Include="Content\smartadmin\custom.less" />
+    <None Include="Content\smartadmin\library\animation\animation-engine.less" />
+    <None Include="Content\smartadmin\library\carouselfade\carouselfade.less" />
+    <None Include="Content\smartadmin\library\flags\flags.less" />
+    <None Include="Content\smartadmin\library\fontawesome\bordered-pulled.less" />
+    <None Include="Content\smartadmin\library\fontawesome\core.less" />
+    <None Include="Content\smartadmin\library\fontawesome\fixed-width.less" />
+    <None Include="Content\smartadmin\library\fontawesome\font-awesome.less" />
+    <None Include="Content\smartadmin\library\fontawesome\icons.less" />
+    <None Include="Content\smartadmin\library\fontawesome\larger.less" />
+    <None Include="Content\smartadmin\library\fontawesome\list.less" />
+    <None Include="Content\smartadmin\library\fontawesome\mixins.less" />
+    <None Include="Content\smartadmin\library\fontawesome\path.less" />
+    <None Include="Content\smartadmin\library\fontawesome\rotated-flipped.less" />
+    <None Include="Content\smartadmin\library\fontawesome\spinning.less" />
+    <None Include="Content\smartadmin\library\fontawesome\stacked.less" />
+    <None Include="Content\smartadmin\library\fontawesome\variables.less" />
+    <None Include="Content\smartadmin\library\jqueryui\jquery-ui-1.10.3.custom.less" />
+    <None Include="Content\smartadmin\overrides.less" />
+    <None Include="Content\smartadmin\smartadmin-production.css.map">
+      <DependentUpon>smartadmin-production.css</DependentUpon>
+    </None>
+    <None Include="Content\smartadmin\smartadmin-production.less" />
+    <None Include="Content\smartadmin\smartadmin-skin\smartadmin-skins.less" />
+    <None Include="Content\smartadmin\smartadmin\component-fullscreen.less" />
+    <None Include="Content\smartadmin\smartadmin\component-jqueryui.less" />
+    <None Include="Content\smartadmin\smartadmin\component-pace.less" />
+    <None Include="Content\smartadmin\smartadmin\component-pricingtable.less" />
+    <None Include="Content\smartadmin\smartadmin\component-smartchat.less" />
+    <None Include="Content\smartadmin\smartadmin\component-smartforms.less" />
+    <None Include="Content\smartadmin\smartadmin\ie-fix.less" />
+    <None Include="Content\smartadmin\smartadmin\main-animated.less" />
+    <None Include="Content\smartadmin\smartadmin\main-colorpallet.less" />
+    <None Include="Content\smartadmin\smartadmin\main-container-fix.less" />
+    <None Include="Content\smartadmin\smartadmin\main-form-radiocheck.less" />
+    <None Include="Content\smartadmin\smartadmin\main-page-footer.less" />
+    <None Include="Content\smartadmin\smartadmin\main-responsive.less" />
+    <None Include="Content\smartadmin\smartadmin\main-special-class.less" />
+    <None Include="Content\smartadmin\smartadmin\main.less" />
+    <None Include="Content\smartadmin\smartadmin\page-error.less" />
+    <None Include="Content\smartadmin\smartadmin\page-extr.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-bootstrap-markdown.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-bootstrap-slider.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-bootstrap-tagsinput.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-bootstrap-timepicker.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-clockpicker.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-colorpicker.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-dataTables-cust.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-dataTables.bootstrap.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-dataTables.colReorder.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-dataTables.colVis.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-dataTables.responsive.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-dataTables.tableTools.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-dropzone.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-fd-slider.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-fullcalendar.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-ion.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-jarviswidget.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-jcrop.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-jqgrid.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-select2.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-smart-notifications.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-summernote.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-superbox.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-voicecommand.less" />
+    <None Include="Content\smartadmin\smartadmin\plugin-xeditable.less" />
+    <None Include="Content\smartadmin\smartadmin\section-ajax-msg.less" />
+    <None Include="Content\smartadmin\smartadmin\section-calendar.less" />
+    <None Include="Content\smartadmin\smartadmin\section-forum.less" />
+    <None Include="Content\smartadmin\smartadmin\section-inbox.less" />
+    <None Include="Content\smartadmin\smartadmin\section-nestables.less" />
+    <None Include="Content\smartadmin\smartadmin\section-profile.less" />
+    <None Include="Content\smartadmin\smartadmin\section-search.less" />
+    <None Include="Content\smartadmin\smartadmin\section-timeline.less" />
+    <None Include="Content\smartadmin\smartadmin\section-todo.less" />
+    <None Include="Content\smartadmin\smartadmin\top-menu.less" />
+    <None Include="Content\smartadmin\variables.less" />
     <None Include="Docs\Entity.md" />
     <None Include="packages.config" />
     <None Include="Scripts\angular-animate.min.js.map" />
@@ -207,7 +355,13 @@
     <None Include="Scripts\errors.json" />
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\smartadmin\smartadmin-production.css" />
+    <Content Include="Content\smartadmin\overrides.css">
+      <DependentUpon>overrides.less</DependentUpon>
+    </Content>
+    <Content Include="Content\smartadmin\readme.txt" />
+    <Content Include="Content\smartadmin\smartadmin-production.css">
+      <DependentUpon>smartadmin-production.less</DependentUpon>
+    </Content>
     <Content Include="Content\smartadmin\smartadmin-skins.css" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
