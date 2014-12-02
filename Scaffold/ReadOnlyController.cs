@@ -66,24 +66,24 @@ namespace Scaffold
             return result;
         }
 
-        public virtual IQueryable<TModel> ApplyQuery(IQueryable<TModel> query)
+        protected virtual IQueryable<TModel> ApplyQuery(IQueryable<TModel> query)
         {
             return query;
         }
 
-        public virtual IQueryable<TModel> ApplyPageAndSort(IQueryable<TModel> query)
+        protected virtual IQueryable<TModel> ApplyPageAndSort(IQueryable<TModel> query)
         {
             var pageBegin = GetQueryString<int>("PageBegin", 1);
-            var pageLength = GetQueryString<int>("PageLength", 100);
+            var pageLength = GetQueryString<int>("PageLength", 0);
             var sortOrder = GetQueryString<string>("SortOrder", "ASC");
-            var sortField = GetQueryString<string>("SortOrder", IDField);
+            var sortField = GetQueryString<string>("SortField", IDField);
             
             query = Sort(query, sortField, sortOrder);
             query = Page(query, pageBegin, pageLength);
             return query;
         }
 
-        public virtual TResult GetQueryString<TResult>(String key, TResult defaultValue = default(TResult))
+        protected virtual TResult GetQueryString<TResult>(String key, TResult defaultValue = default(TResult))
         {
             if (queryStrings == null)
                 queryStrings = Request.GetQueryNameValuePairs();
@@ -95,14 +95,14 @@ namespace Scaffold
             return (TResult)Convert.ChangeType(match.Value, typeof(TResult));
         }
 
-        public virtual IQueryable<TModel> Sort(IQueryable<TModel> query, string sortField, string sortOrder)
+        protected virtual IQueryable<TModel> Sort(IQueryable<TModel> query, string sortField, string sortOrder)
         {
             if (sortOrder != "ASC" && sortOrder != "DESC")
                 sortOrder = "ASC";
             return query.OrderBy(sortField.Trim() + " " + sortOrder.Trim());
         }
 
-        public virtual IQueryable<TModel> Page(IQueryable<TModel> query, int pageBegin, int pageLength)
+        protected virtual IQueryable<TModel> Page(IQueryable<TModel> query, int pageBegin, int pageLength)
         {
             if (pageBegin > 0)
                 query = query.Skip((pageBegin - 1) * pageLength);
