@@ -24,6 +24,8 @@ namespace Scaffold
         protected List<Expression<Func<TModel, Object>>> ListIncludes = 
             new List<Expression<Func<TModel,object>>>();
 
+        private IEnumerable<KeyValuePair<string, string>> queryStrings;
+
         public virtual IQueryable<TModel> GetAll()
         {
             IQueryable<TModel> exp = dbSet;
@@ -71,23 +73,22 @@ namespace Scaffold
 
         public virtual IQueryable<TModel> ApplyPageAndSort(IQueryable<TModel> query)
         {
-            var queryNameValuePairs = Request.GetQueryNameValuePairs();
-            var pageBegin = GetQueryString<int>(queryNameValuePairs, "PageBegin", 1);
-            var pageLength = GetQueryString<int>(queryNameValuePairs, "PageLength", 100);
-            var sortOrder = GetQueryString<string>(queryNameValuePairs, "SortOrder", "ASC");
-            var sortField = GetQueryString<string>(queryNameValuePairs, "SortOrder", IDField);
+            var pageBegin = GetQueryString<int>("PageBegin", 1);
+            var pageLength = GetQueryString<int>("PageLength", 100);
+            var sortOrder = GetQueryString<string>("SortOrder", "ASC");
+            var sortField = GetQueryString<string>("SortOrder", IDField);
             
             query = Sort(query, sortField, sortOrder);
             query = Page(query, pageBegin, pageLength);
             return query;
         }
 
-        public virtual TResult GetQueryString<TResult>(IEnumerable<KeyValuePair<string,string>> queryNameValuePairs, String key, TResult defaultValue)
+        public virtual TResult GetQueryString<TResult>(String key, TResult defaultValue = default(TResult))
         {
-            if (queryNameValuePairs == null)
-                return defaultValue;
+            if (queryStrings == null)
+                queryStrings = Request.GetQueryNameValuePairs();
 
-            var match = queryNameValuePairs.FirstOrDefault(kv => string.Compare(kv.Key, key, true) == 0);
+            var match = queryStrings.FirstOrDefault(kv => string.Compare(kv.Key, key, true) == 0);
             if (string.IsNullOrWhiteSpace(match.Value))
                 return defaultValue;
 
