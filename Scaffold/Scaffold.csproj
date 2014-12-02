@@ -90,11 +90,9 @@
     <Compile Include="CRUDController.cs" />
     <Compile Include="DTEUtils.cs" />
     <Compile Include="Exceptions\NotFound.cs" />
-    <Compile Include="IQuery.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="ModelController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="DefaultQuery.cs" />
     <Compile Include="ReadOnlyController.cs" />
     <Compile Include="ToTSAttribute.cs" />
     <Compile Include="UploadController.cs" />
