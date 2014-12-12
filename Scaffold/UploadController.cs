@@ -30,7 +30,7 @@ namespace Scaffold
                 throw new HttpResponseException(Request.CreateResponse(HttpStatusCode.UnsupportedMediaType));
             
             string root = HttpContext.Current.Server.MapPath("~/Content/uploads/" + UploadFolder); 
-            var provider = new GuidMultipartFormDataStreamProvider(root);             
+            var provider = new CustomMultipartFormDataStreamProvider(root);             
 
             var task = Request.Content.ReadAsMultipartAsync(provider).ContinueWith<IEnumerable<FileDesc>>(t => {                
                 if (t.IsFaulted || t.IsCanceled)
@@ -43,7 +43,7 @@ namespace Scaffold
                     return new FileDesc(
                         info.Name, 
                         i.Headers.ContentType.MediaType, 
-                        root + "/uploads/" + UploadFolder, 
+                        root, 
                         info.Length / 1024);
                 });
 
@@ -79,6 +79,17 @@ namespace Scaffold
         public override string GetLocalFileName(System.Net.Http.Headers.HttpContentHeaders headers)
         {
             return Guid.NewGuid().ToString("N"); // N = 32 digits no hyphens;
+        }
+    }
+
+    public class CustomMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
+    {
+        public CustomMultipartFormDataStreamProvider(string path) : base(path) { }
+
+        public override string GetLocalFileName(System.Net.Http.Headers.HttpContentHeaders headers)
+        {
+            var name = !string.IsNullOrWhiteSpace(headers.ContentDisposition.FileName) ? headers.ContentDisposition.FileName : "NoName";
+            return name.Replace("\"", string.Empty); //this is here because Chrome submits files in quotation marks which get treated as part of the filename and get escaped
         }
     }
 
