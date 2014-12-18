@@ -92,7 +92,11 @@ namespace Scaffold
             if (string.IsNullOrWhiteSpace(match.Value))
                 return defaultValue;
 
-            return (TResult)Convert.ChangeType(match.Value, typeof(TResult));
+            var type = typeof(TResult);
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                type = type.GenericTypeArguments[0];
+
+            return (TResult)Convert.ChangeType(match.Value, type);
         }
 
         protected virtual IQueryable<TModel> Sort(IQueryable<TModel> query, string sortField, string sortOrder)

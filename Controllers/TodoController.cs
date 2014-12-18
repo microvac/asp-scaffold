@@ -10,7 +10,7 @@ using System.Web.Http;
 
 namespace App.Controllers
 {
-    public class TodoController : CRUDController<Todo>
+    public class TodoController : CRUDController<Todo, long>
     {
         public TodoController(DB dbContext): base(dbContext) {}
 
@@ -24,9 +24,5 @@ namespace App.Controllers
             return 0;
         }
 
-        public int PostBody2([FromBody] Model2 todo) 
-        {
-            return 0;
-        }
     }
 }

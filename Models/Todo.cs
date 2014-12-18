@@ -7,8 +7,9 @@ using System.Web;
 
 namespace App.Models
 {
-    public class Todo: Model
+    public class Todo: IModel<long>
     {
+        public long ID { get; set; }
         public String Name { get; set; }
         public String Description { get; set; }
     }
