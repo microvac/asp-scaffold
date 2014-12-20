@@ -66,10 +66,10 @@ namespace Scaffold
             return task;
         }
 
-        public static String ToAbsolutePath(IBlob blob)
+        public static FileInfo ToAbsoluteFile(IBlob blob)
         {
             var root = HttpContext.Current.Server.MapPath("~/Content/uploads/" + blob.UploadFolder);
-            return Path.Combine(root, blob.UploadID);
+            return new FileInfo(Path.Combine(root, blob.UploadID));
         }
 
     }
