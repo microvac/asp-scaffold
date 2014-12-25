@@ -26,8 +26,12 @@ namespace Scaffold
 
         private IEnumerable<KeyValuePair<string, string>> queryStrings;
 
+        protected bool AllowGetAll = true;
+
         public virtual IQueryable<TModel> GetAll()
         {
+            if (!AllowGetAll)
+                throw new ApplicationException("Get all is not allowed");
             IQueryable<TModel> exp = dbSet;
             
             foreach (var include in ListIncludes)

@@ -11,54 +11,47 @@ using System.IO;
 namespace Scaffold
 {   
 
-    // SOURCE:
-    // http://stackoverflow.com/questions/10320232/how-to-accept-a-file-post-asp-net-mvc-4-webapi
-    // http://www.strathweb.com/2012/08/a-guide-to-asynchronous-file-uploads-in-asp-net-web-api-rtm/
     public class Uploader
     {
-        public String UploadFolder { get; private set; }
-
         protected readonly string root;
 
-        public Uploader(string uploadFolder) {
-            UploadFolder = uploadFolder;
-            root = HttpContext.Current.Server.MapPath("~/Content/uploads/" + UploadFolder);
+        public Uploader() {
+            root = HttpContext.Current.Server.MapPath("~/App_Data/uploads");
             Directory.CreateDirectory(root);
         }
 
-        public Task<UploadResult<TBlob>> PostFile<TBlob>(HttpRequestMessage request)
-            where TBlob: IBlob, new()
+        public Task<UploadResult> PostFile<TBlob>(HttpRequestMessage request)
         {
             if (!request.Content.IsMimeMultipartContent())
                 throw new HttpResponseException(request.CreateResponse(HttpStatusCode.UnsupportedMediaType));
             
             var provider = new GuidMultipartFormDataStreamProvider(root);
 
-            var task = request.Content.ReadAsMultipartAsync(provider).ContinueWith<UploadResult<TBlob>>(t =>
+            var task = request.Content.ReadAsMultipartAsync(provider).ContinueWith<UploadResult>(t =>
             {                
                 if (t.IsFaulted || t.IsCanceled)
                 {
                     request.CreateErrorResponse(HttpStatusCode.InternalServerError, t.Exception);
                 }
-                var blobs = provider.FileData.Select(i => {
+                var files = provider.FileData.Select(i => {
                     var info = new FileInfo(i.LocalFileName);
-                    var blob = new TBlob
+                    var file = new FileResult
                     {
+                        Root = root,
                         Name = "todo",
                         UploadID = info.Name,
                         Type = i.Headers.ContentType.MediaType,
-                        Size = info.Length / 1024,
-                        UploadFolder = UploadFolder
+                        Size = info.Length / 1024
                     };
 
-                    return blob;
+                    return file;
                 });
 
                 var forms = provider.FormData.AllKeys.ToDictionary(k => k, k => provider.FormData[k]);
 
-                return new UploadResult<TBlob>
+                return new UploadResult
                 {
-                    Files = blobs,
+                    Files = files.ToList(),
                     Forms = forms,
                 };
             });
@@ -66,19 +59,21 @@ namespace Scaffold
             return task;
         }
 
-        public static FileInfo ToAbsoluteFile(IBlob blob)
-        {
-            var root = HttpContext.Current.Server.MapPath("~/Content/uploads/" + blob.UploadFolder);
-            return new FileInfo(Path.Combine(root, blob.UploadID));
-        }
-
     }
 
-    public class UploadResult<TBlob>
-        where TBlob: IBlob, new()
+    public class UploadResult
     {
-        public IEnumerable<TBlob> Files { get; set; }
+        public IList<FileResult> Files { get; set; }
         public IDictionary<String, String> Forms { get; set; }
+
+        public void DeleteUnmoved()
+        {
+            foreach(var file in Files)
+            {
+                if (file.IsExists)
+                    file.Delete();
+            }
+        }
     }
 
     public class GuidMultipartFormDataStreamProvider : MultipartFormDataStreamProvider

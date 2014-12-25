@@ -90,7 +90,7 @@
     <Compile Include="CRUDController.cs" />
     <Compile Include="DTEUtils.cs" />
     <Compile Include="Exceptions\NotFound.cs" />
-    <Compile Include="IBlob.cs" />
+    <Compile Include="FileResult.cs" />
     <Compile Include="IModel.cs" />
     <Compile Include="ModelController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
