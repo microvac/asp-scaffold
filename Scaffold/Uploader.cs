@@ -35,10 +35,15 @@ namespace Scaffold
                 }
                 var files = provider.FileData.Select(i => {
                     var info = new FileInfo(i.LocalFileName);
+                    String fileName = null;
+                    if (i.Headers.ContentDisposition != null)
+                        fileName = i.Headers.ContentDisposition.FileName;
+                    if (fileName != null)
+                        fileName = Path.GetFileName(fileName.Replace("\"", ""));
                     var file = new FileResult
                     {
                         Root = root,
-                        Name = "todo",
+                        Name = fileName,
                         UploadID = info.Name,
                         Type = i.Headers.ContentType.MediaType,
                         Size = info.Length / 1024
