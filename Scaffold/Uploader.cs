@@ -66,6 +66,13 @@ namespace Scaffold
         public IList<FileResult> Files { get; set; }
         public IDictionary<String, String> Forms { get; set; }
 
+        public String GetForm(String key)
+        {
+            if (!Forms.ContainsKey(key))
+                return null;
+            return Forms[key];
+        }
+
         public void DeleteUnmoved()
         {
             foreach(var file in Files)
