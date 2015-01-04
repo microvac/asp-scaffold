@@ -7,20 +7,33 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.IO;
+using System.Web.Http.ModelBinding;
+using System.Web.Http.Controllers;
 
 namespace Scaffold
 {   
+    public class UploaderModelBinder: IModelBinder
+    {
+        public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+        {
+            bindingContext.Model = new Uploader(actionContext.Request);
+            return true;
+        }
+    }
 
+    [ModelBinder(typeof(UploaderModelBinder))]
     public class Uploader
     {
         protected readonly string root;
+        private HttpRequestMessage request;
 
-        public Uploader() {
+        public Uploader(HttpRequestMessage request) {
+            this.request = request;
             root = HttpContext.Current.Server.MapPath("~/App_Data/uploads");
             Directory.CreateDirectory(root);
         }
 
-        public Task<UploadResult> PostFile<TBlob>(HttpRequestMessage request)
+        public Task<UploadResult> PostFile()
         {
             if (!request.Content.IsMimeMultipartContent())
                 throw new HttpResponseException(request.CreateResponse(HttpStatusCode.UnsupportedMediaType));
