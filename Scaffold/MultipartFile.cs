@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Scaffold
 {
-    public class FileResult
+    public class MultipartFile
     {
         public string Root { get; set; }
         public string UploadID { get; set; }

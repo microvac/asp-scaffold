@@ -16,7 +16,7 @@ using System.Web.Http.Metadata.Providers;
 
 namespace Scaffold
 {   
-    public class UploaderModelBinder: IModelBinder
+    public class MultipartModelBinder: IModelBinder
     {
         public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
         {
@@ -26,26 +26,25 @@ namespace Scaffold
     }
 
 
-    [ModelBinder(typeof(UploaderModelBinder))]
-    public class Uploader
+    [ModelBinder(typeof(MultipartModelBinder))]
+    public class Multipart
     {
         protected readonly string root;
         private HttpActionContext actionContext;
 
-        public IList<FileResult> Files { get; set; }
+        public IList<MultipartFile> Files { get; set; }
         public IDictionary<String, String> Forms { get; set; }
 
-        public Uploader(HttpActionContext actionContext)
+        public Multipart(HttpActionContext actionContext)
         {
             this.actionContext = actionContext;
             root = HttpContext.Current.Server.MapPath("~/App_Data/uploads");
             Directory.CreateDirectory(root);
-            var pr = AsyncHelper.RunSync<UploadResult>(PostFile);
-            Files = pr.Files;
-            Forms = pr.Forms;
+            AsyncHelper.RunSync(ProcessBody);
+
         }
 
-        private Task<UploadResult> PostFile()
+        private Task ProcessBody()
         {
             var request = actionContext.Request;
 
@@ -54,7 +53,7 @@ namespace Scaffold
             
             var provider = new GuidMultipartFormDataStreamProvider(root);
 
-            var task = request.Content.ReadAsMultipartAsync(provider).ContinueWith<UploadResult>(t =>
+            var task = request.Content.ReadAsMultipartAsync(provider).ContinueWith(t =>
             {                
                 if (t.IsFaulted || t.IsCanceled)
                 {
@@ -67,7 +66,7 @@ namespace Scaffold
                         fileName = i.Headers.ContentDisposition.FileName;
                     if (fileName != null)
                         fileName = Path.GetFileName(fileName.Replace("\"", ""));
-                    var file = new FileResult
+                    var file = new MultipartFile
                     {
                         Root = root,
                         Name = fileName,
@@ -81,11 +80,8 @@ namespace Scaffold
 
                 var forms = provider.FormData.AllKeys.ToDictionary(k => k, k => provider.FormData[k]);
 
-                return new UploadResult
-                {
-                    Files = files.ToList(),
-                    Forms = forms,
-                };
+                this.Files = files.ToList();
+                this.Forms = forms;
             });
 
             return task;
@@ -109,11 +105,11 @@ namespace Scaffold
 
     }
 
-    [ModelBinder(typeof(UploaderModelBinder))]
-    public class Uploader<T>: Uploader
+    [ModelBinder(typeof(MultipartModelBinder))]
+    public class Multipart<T>: Multipart
     {
         public T Entity { get; set; }
-        public Uploader(HttpActionContext actionContext)
+        public Multipart(HttpActionContext actionContext)
             : base(actionContext)
         {
             var valueProvider = new SimpleHttpValueProvider();
@@ -130,28 +126,6 @@ namespace Scaffold
                 Entity = (T) bindingContext.Model;
         }
 
-    }
-
-    public class UploadResult
-    {
-        public IList<FileResult> Files { get; set; }
-        public IDictionary<String, String> Forms { get; set; }
-
-        public String GetForm(String key)
-        {
-            if (!Forms.ContainsKey(key))
-                return null;
-            return Forms[key];
-        }
-
-        public void DeleteUnmoved()
-        {
-            foreach(var file in Files)
-            {
-                if (file.IsExists)
-                    file.Delete();
-            }
-        }
     }
 
     public class GuidMultipartFormDataStreamProvider : MultipartFormDataStreamProvider
