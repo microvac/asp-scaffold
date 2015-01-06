@@ -93,6 +93,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControllerExtensions\ApiControllerExtension.cs" />
     <Compile Include="CRUDController.cs" />
     <Compile Include="Exceptions\NotFound.cs" />
     <Compile Include="FileResult.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="Utils\AsyncHelper.cs" />
     <Compile Include="Validation\MethodModelValidator.cs" />
     <Compile Include="Validation\MethodModelValidatorProvider.cs" />
+    <Compile Include="Validation\Invalid.cs" />
     <Compile Include="Validation\ValidatorAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
