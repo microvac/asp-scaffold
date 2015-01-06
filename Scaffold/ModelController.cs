@@ -30,6 +30,7 @@ namespace Scaffold
             TModel  model;
             public Updator(DbContext dbContext, DbSet<TModel> dbSet, TModel model)
             {
+                this.dbContext = dbContext;
                 this.dbSet = dbSet;
                 this.model = model;
             }
@@ -37,14 +38,9 @@ namespace Scaffold
             public Updator<TModel, TID> Set<TProperty>(Expression<Func<TModel, TProperty>> memberLamda, TProperty value)
             {
                 var memberSelectorExpression = memberLamda.Body as MemberExpression;
-                if (memberSelectorExpression != null)
-                {
-                    var property = memberSelectorExpression.Member as PropertyInfo;
-                    if (property != null)
-                    {
-                        property.SetValue(model, value, null);
-                    }
-                }
+                var property = memberSelectorExpression.Member as PropertyInfo;
+                property.SetValue(model, value, null);
+
                 dbContext.Entry<TModel>(model).Property(memberLamda).IsModified = true;
 
                 return this;
@@ -60,6 +56,11 @@ namespace Scaffold
         {
             var model = new TModel();
             model.ID = id;
+            dbSet.Attach(model);
+            return new Updator<TModel, TId>(dbContext, dbSet, model);
+        }
+        protected Updator<TModel, TId> Update(TModel model)
+        {
             return new Updator<TModel, TId>(dbContext, dbSet, model);
         }
     }
