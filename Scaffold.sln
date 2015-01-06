@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F906C2
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scaffold.Test", "Scaffold.Test\Scaffold.Test.csproj", "{C336EA8E-919A-4CA2-B61F-D0357352D317}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C51DFF62-62F4-4451-9757-FD8D97CDA2A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C51DFF62-62F4-4451-9757-FD8D97CDA2A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C51DFF62-62F4-4451-9757-FD8D97CDA2A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C336EA8E-919A-4CA2-B61F-D0357352D317}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C336EA8E-919A-4CA2-B61F-D0357352D317}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C336EA8E-919A-4CA2-B61F-D0357352D317}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C336EA8E-919A-4CA2-B61F-D0357352D317}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
