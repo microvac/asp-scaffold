@@ -9,6 +9,10 @@ using System.Web.Http;
 using System.IO;
 using System.Web.Http.ModelBinding;
 using System.Web.Http.Controllers;
+using Scaffold.Utils;
+using System.Web.Http.ValueProviders;
+using System.Globalization;
+using System.Web.Http.Metadata.Providers;
 
 namespace Scaffold
 {   
@@ -16,25 +20,35 @@ namespace Scaffold
     {
         public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
         {
-            bindingContext.Model = new Uploader(actionContext.Request);
+            bindingContext.Model = Activator.CreateInstance(bindingContext.ModelType, actionContext);
             return true;
         }
     }
+
 
     [ModelBinder(typeof(UploaderModelBinder))]
     public class Uploader
     {
         protected readonly string root;
-        private HttpRequestMessage request;
+        private HttpActionContext actionContext;
 
-        public Uploader(HttpRequestMessage request) {
-            this.request = request;
+        public IList<FileResult> Files { get; set; }
+        public IDictionary<String, String> Forms { get; set; }
+
+        public Uploader(HttpActionContext actionContext)
+        {
+            this.actionContext = actionContext;
             root = HttpContext.Current.Server.MapPath("~/App_Data/uploads");
             Directory.CreateDirectory(root);
+            var pr = AsyncHelper.RunSync<UploadResult>(PostFile);
+            Files = pr.Files;
+            Forms = pr.Forms;
         }
 
-        public Task<UploadResult> PostFile()
+        private Task<UploadResult> PostFile()
         {
+            var request = actionContext.Request;
+
             if (!request.Content.IsMimeMultipartContent())
                 throw new HttpResponseException(request.CreateResponse(HttpStatusCode.UnsupportedMediaType));
             
@@ -77,6 +91,45 @@ namespace Scaffold
             return task;
         }
 
+        public String GetForm(String key)
+        {
+            if (!Forms.ContainsKey(key))
+                return null;
+            return Forms[key];
+        }
+
+        public void DeleteUnmoved()
+        {
+            foreach (var file in Files)
+            {
+                if (file.IsExists)
+                    file.Delete();
+            }
+        }
+
+    }
+
+    [ModelBinder(typeof(UploaderModelBinder))]
+    public class Uploader<T>: Uploader
+    {
+        public T Entity { get; set; }
+        public Uploader(HttpActionContext actionContext)
+            : base(actionContext)
+        {
+            var valueProvider = new SimpleHttpValueProvider();
+            foreach (var key in Forms.Keys)
+                valueProvider[key] = Forms[key];
+
+            ModelBindingContext bindingContext = new ModelBindingContext
+            {
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(T)),
+                ValueProvider = valueProvider
+            };
+            bool retVal = actionContext.Bind(bindingContext);
+            if (retVal)
+                Entity = (T) bindingContext.Model;
+        }
+
     }
 
     public class UploadResult
@@ -111,4 +164,67 @@ namespace Scaffold
         }
     }
 
+    public class SimpleHttpValueProvider : Dictionary<string, object>, IValueProvider
+    {
+        private readonly CultureInfo _culture;
+
+        public SimpleHttpValueProvider()
+            : this(null)
+        {
+        }
+
+        public SimpleHttpValueProvider(CultureInfo culture)
+            : base(StringComparer.OrdinalIgnoreCase)
+        {
+            _culture = culture ?? CultureInfo.InvariantCulture;
+        }
+
+        // copied from ValueProviderUtil
+        public bool ContainsPrefix(string prefix)
+        {
+            foreach (string key in Keys)
+            {
+                if (key != null)
+                {
+                    if (prefix.Length == 0)
+                    {
+                        return true; // shortcut - non-null key matches empty prefix
+                    }
+
+                    if (key.StartsWith(prefix, StringComparison.OrdinalIgnoreCase))
+                    {
+                        if (key.Length == prefix.Length)
+                        {
+                            return true; // exact match
+                        }
+                        else
+                        {
+                            switch (key[prefix.Length])
+                            {
+                                case '.': // known separator characters
+                                case '[':
+                                    return true;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return false; // nothing found
+        }
+
+        public ValueProviderResult GetValue(string key)
+        {
+            object rawValue;
+            if (TryGetValue(key, out rawValue))
+            {
+                return new ValueProviderResult(rawValue, Convert.ToString(rawValue, _culture), _culture);
+            }
+            else
+            {
+                // value not found
+                return null;
+            }
+        }
+    }
 }

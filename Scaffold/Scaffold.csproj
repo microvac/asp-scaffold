@@ -102,6 +102,7 @@
     <Compile Include="ReadOnlyController.cs" />
     <Compile Include="ToTSAttribute.cs" />
     <Compile Include="Uploader.cs" />
+    <Compile Include="Utils\AsyncHelper.cs" />
     <Compile Include="Validation\MethodModelValidator.cs" />
     <Compile Include="Validation\MethodModelValidatorProvider.cs" />
     <Compile Include="Validation\ValidatorAttribute.cs" />
