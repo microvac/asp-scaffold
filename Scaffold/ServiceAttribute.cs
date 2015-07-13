@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Scaffold
 {
-    public interface IModel<TId>
+    public class ServiceAttribute: Attribute
     {
-        TId Id { get; set; }
     }
 }

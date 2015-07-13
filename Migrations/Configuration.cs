@@ -1,6 +1,5 @@
 namespace App.Migrations
 {
-    using Devart.Data.PostgreSql.Entity.Migrations;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -12,7 +11,6 @@ namespace App.Migrations
         {
             AutomaticMigrationsEnabled = true;
             AutomaticMigrationDataLossAllowed = true;
-            SetSqlGenerator(PgSqlConnectionInfo.InvariantName, new PgSqlEntityMigrationSqlGenerator());
         }
 
         protected override void Seed(App.Models.DB context)

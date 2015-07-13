@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Scaffold
 {
-    public interface IModel<TId>
+    public class ViewModelAttribute: Attribute
     {
-        TId Id { get; set; }
     }
 }
