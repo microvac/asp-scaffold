@@ -45,6 +45,11 @@ namespace Scaffold
 
                 return this;
             }
+            public Updator<TModel, TID> Set<TProperty>(Expression<Func<TModel, TProperty>> memberLamda)
+            {
+                dbContext.Entry<TModel>(model).Property(memberLamda).IsModified = true;
+                return this;
+            }
 
             public void Save()
             {
@@ -61,6 +66,7 @@ namespace Scaffold
         }
         protected Updator<TModel, TId> Update(TModel model)
         {
+            dbSet.Attach(model);
             return new Updator<TModel, TId>(dbContext, dbSet, model);
         }
     }

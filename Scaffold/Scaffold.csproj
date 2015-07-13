@@ -36,11 +36,13 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="FluentValidation">
       <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
@@ -186,6 +188,9 @@
     <None Include="Content\fontawesome\core.less" />
     <None Include="Content\fontawesome\extras.less" />
     <None Include="Content\fontawesome\fixed-width.less" />
+    <None Include="Content\fontawesome\font-awesome.css.map">
+      <DependentUpon>font-awesome.css</DependentUpon>
+    </None>
     <None Include="Content\fontawesome\font-awesome.less" />
     <None Include="Content\fontawesome\icons.less" />
     <None Include="Content\fontawesome\larger.less" />
@@ -364,6 +369,12 @@
     <None Include="Scripts\angular-touch.min.js.map" />
     <None Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\errors.json" />
+    <Content Include="Content\fontawesome\font-awesome.css">
+      <DependentUpon>font-awesome.less</DependentUpon>
+    </Content>
+    <Content Include="Content\fontawesome\font-awesome.min.css">
+      <DependentUpon>font-awesome.css</DependentUpon>
+    </Content>
     <Content Include="Content\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\smartadmin\overrides.css">
