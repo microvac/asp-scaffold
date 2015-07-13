@@ -55,7 +55,7 @@ namespace Scaffold
         protected Updator<TModel, TId> Update(TId id)
         {
             var model = new TModel();
-            model.ID = id;
+            model.Id = id;
             dbSet.Attach(model);
             return new Updator<TModel, TId>(dbContext, dbSet, model);
         }

@@ -8,6 +8,6 @@ namespace Scaffold
 {
     public interface IModel<TId>
     {
-        TId ID { get; set; }
+        TId Id { get; set; }
     }
 }

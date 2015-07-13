@@ -17,7 +17,7 @@ namespace Scaffold
 
         public virtual void Delete(TId id)
         {
-            var model = new TModel { ID = id };            
+            var model = new TModel { Id = id };            
             dbContext.Entry(model).State = EntityState.Deleted;
             dbContext.SaveChanges();
         }
@@ -28,7 +28,7 @@ namespace Scaffold
             dbSet.Add(model);
             dbContext.SaveChanges();
             PostPersist(model);
-            return model.ID;
+            return model.Id;
         }
 
         public virtual void Put([FromBody] TModel model)
