@@ -10,12 +10,10 @@ using System.Web.Http;
 
 namespace Scaffold
 {
-    public class CRUDController<TModel, TId, TQuery>: ReadOnlyController<TModel, TId, TQuery>
+    public class CRUDController<TModel, TId>: ReadOnlyController<TModel, TId>
         where TModel: class, IModel<TId>, new()
-        where TQuery: IQuery<TModel>, new()
     {
         public CRUDController(DbContext dbContext): base(dbContext) { }
-
 
         public virtual void Delete(TId id)
         {
@@ -44,10 +42,5 @@ namespace Scaffold
         protected virtual void PrePersist(TModel model) { }
         protected virtual void PostPersist(TModel model) { }
     }
-
-    public class CRUDController<TModel, TId >: CRUDController<TModel, TId, DefaultQuery<TModel>>
-        where TModel: class, IModel<TId>, new()
-    {
-        public CRUDController(DbContext dbContext): base(dbContext) { }
-    }
+      
 }

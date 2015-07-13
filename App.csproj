@@ -197,7 +197,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Anu.cs" />
     <Compile Include="Models\DB.cs" />
-    <Compile Include="Models\Model2.cs" />
     <Compile Include="Models\Todo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Content\app\imports.css">

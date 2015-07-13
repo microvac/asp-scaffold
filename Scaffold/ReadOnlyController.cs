@@ -6,16 +6,16 @@ using System.Linq.Expressions;
 using System.Linq.Dynamic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.Http;
 using System.Web.Http;
+using System.Collections.Specialized;
 
 namespace Scaffold
 {
-    public class ReadOnlyController<TModel, TId, TQuery>: ModelController<TModel, TId>
+    public class ReadOnlyController<TModel, TId>: ModelController<TModel, TId>
         where TModel: class, IModel<TId>, new() 
-        where TQuery: IQuery<TModel>, new()
     {
         public ReadOnlyController(DbContext dbContext) : base(dbContext) { IDField = "ID"; }
-
         public string IDField { get; set; }
 
         protected List<Expression<Func<TModel, Object>>> SingleIncludes = 
@@ -24,23 +24,30 @@ namespace Scaffold
         protected List<Expression<Func<TModel, Object>>> ListIncludes = 
             new List<Expression<Func<TModel,object>>>();
 
-        public virtual IEnumerable<TModel> GetAll([FromUri] TQuery query)
+        private IEnumerable<KeyValuePair<string, string>> queryStrings;
+
+        protected bool AllowGetAll = true;
+
+        public virtual IQueryable<TModel> GetAll()
         {
+            if (!AllowGetAll)
+                throw new ApplicationException("Get all is not allowed");
             IQueryable<TModel> exp = dbSet;
+            
             foreach (var include in ListIncludes)
             {
                 exp = exp.Include(include);
             }
-            if (query != null)
-                exp = query.Page(query.Sort(query.Filter(exp)));
+            
+            exp = ApplyQuery(exp);
+            exp = ApplyPageAndSort(exp);
             return exp;
         }
 
-        public virtual long GetCount([FromUri] TQuery query)
+        public virtual long GetCount()
         {
             IQueryable<TModel> exp = dbSet;
-            if (query != null)
-                exp = query.Filter(exp);
+            exp = ApplyQuery(exp);
             var result = exp.LongCount();
             return result;
         }
@@ -48,10 +55,12 @@ namespace Scaffold
         public virtual TModel Get(TId id)
         {
             IQueryable<TModel> exp = null;
+            
             if(typeof(TId) == typeof(String))
-                exp = dbSet.Where(IDField + "=\"" + id+"\"");
+                exp = dbSet.Where(IDField + "=\"" + id +"\"");
             else
                 exp = dbSet.Where(IDField + "=" + id);
+            
             foreach (var include in SingleIncludes)
             {
                 exp = exp.Include(include);
@@ -59,6 +68,55 @@ namespace Scaffold
 
             var result = exp.SingleOrDefault();
             return result;
+        }
+
+        protected virtual IQueryable<TModel> ApplyQuery(IQueryable<TModel> query)
+        {
+            return query;
+        }
+
+        protected virtual IQueryable<TModel> ApplyPageAndSort(IQueryable<TModel> query)
+        {
+            var pageBegin = GetQueryString<int>("PageBegin", 1);
+            var pageLength = GetQueryString<int>("PageLength", 0);
+            var sortOrder = GetQueryString<string>("SortOrder", "ASC");
+            var sortField = GetQueryString<string>("SortField", IDField);
+            
+            query = Sort(query, sortField, sortOrder);
+            query = Page(query, pageBegin, pageLength);
+            return query;
+        }
+
+        protected virtual TResult GetQueryString<TResult>(String key, TResult defaultValue = default(TResult))
+        {
+            if (queryStrings == null)
+                queryStrings = Request.GetQueryNameValuePairs();
+
+            var match = queryStrings.FirstOrDefault(kv => string.Compare(kv.Key, key, true) == 0);
+            if (string.IsNullOrWhiteSpace(match.Value))
+                return defaultValue;
+
+            var type = typeof(TResult);
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                type = type.GenericTypeArguments[0];
+
+            return (TResult)Convert.ChangeType(match.Value, type);
+        }
+
+        protected virtual IQueryable<TModel> Sort(IQueryable<TModel> query, string sortField, string sortOrder)
+        {
+            if (sortOrder != "ASC" && sortOrder != "DESC")
+                sortOrder = "ASC";
+            return query.OrderBy(sortField.Trim() + " " + sortOrder.Trim());
+        }
+
+        protected virtual IQueryable<TModel> Page(IQueryable<TModel> query, int pageBegin, int pageLength)
+        {
+            if (pageBegin > 0)
+                query = query.Skip((pageBegin - 1) * pageLength);
+            if (pageLength > 0)
+                query = query.Take(pageLength);
+            return query;
         }
 
         protected void SingleInclude(params Expression<Func<TModel, Object>>[] includes)
@@ -81,10 +139,5 @@ namespace Scaffold
         }
 
     }
-
-    public class ReadOnlyController<TModel, TId>: ReadOnlyController<TModel, TId, DefaultQuery<TModel>>
-        where TModel: class, IModel<TId>, new() 
-    {
-        public ReadOnlyController(DbContext dbContext): base(dbContext) { }
-    }
+   
 }

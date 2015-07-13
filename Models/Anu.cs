@@ -6,9 +6,9 @@ using System.Web;
 
 namespace App.Models
 {
-    public class Anu: Model
+    public class Anu: IModel<long>
     {
-        public int Satu { get; set; }
+        public long ID { get; set; }
         public int Dua { get; set; }
     }
 }

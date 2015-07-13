@@ -10,13 +10,13 @@ using System.Web.Http;
 
 namespace App.Controllers
 {
-    public class AnuController : CRUDController<Anu>
+    public class AnuController : CRUDController<Anu, long>
     {
         public AnuController(DB dbContext): base(dbContext) {}
 
         public int PostCount([FromBody] Anu anu)
         {
-            return anu.Satu + anu.Dua;
+            return anu.Dua;
         }
     }
 }
