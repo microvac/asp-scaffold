@@ -59,10 +59,15 @@ namespace Scaffold
 
         protected Updator<TModel, TId> Update(TId id)
         {
+            return Update(dbContext, id);
+        }
+
+        public static Updator<TModel, TId> Update(DbContext dbContext, TId id)
+        {
             var model = new TModel();
             model.Id = id;
-            dbSet.Attach(model);
-            return new Updator<TModel, TId>(dbContext, dbSet, model);
+            dbContext.Set<TModel>().Attach(model);
+            return new Updator<TModel, TId>(dbContext, dbContext.Set<TModel>(), model);
         }
         protected Updator<TModel, TId> Update(TModel model)
         {

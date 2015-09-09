@@ -100,6 +100,11 @@ namespace Scaffold
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
                 type = type.GenericTypeArguments[0];
 
+            if (type.IsEnum)
+            {
+                return (TResult) Enum.ToObject(type, Convert.ToUInt64(match.Value));
+            }
+
             return (TResult)Convert.ChangeType(match.Value, type);
         }
 
